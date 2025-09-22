@@ -16,8 +16,10 @@
     --popover: 0 0% 12%;
     --popover-foreground: 0 0% 95%;
 
-    --primary: 0 0% 85%; /* Light grey */
-    --primary-foreground: 0 0% 15%; /* Dark charcoal */
+    /* Primary color replaced with #f8a824 (amber) */
+    --primary: 41 93% 57%;
+    /* Foreground for primary set to near black on light bg and white on dark contexts */
+    --primary-foreground: 0 0% 10%;
 
     --secondary: 0 0% 18%; /* Medium charcoal */
     --secondary-foreground: 0 0% 95%;
@@ -25,8 +27,9 @@
     --muted: 0 0% 22%; /* Lighter charcoal */
     --muted-foreground: 0 0% 70%; /* Medium grey */
 
-    --accent: 0 0% 85%; /* Light grey accent */
-    --accent-foreground: 0 0% 15%;
+    /* Accent can mirror primary for cohesive brand */
+    --accent: 41 93% 57%;
+    --accent-foreground: 0 0% 10%;
 
     --destructive: 0 84% 60%;
     --destructive-foreground: 210 40% 98%;
@@ -48,8 +51,9 @@
     --popover: 0 0% 96%;
     --popover-foreground: 0 0% 20%;
 
-    --primary: 0 0% 25%; /* Dark grey primary */
-    --primary-foreground: 0 0% 98%; /* Very light grey */
+    /* Light mode primary remains brand amber */
+    --primary: 41 93% 57%;
+    --primary-foreground: 0 0% 6%;
 
     --secondary: 0 0% 92%; /* Light grey secondary */
     --secondary-foreground: 0 0% 25%;
@@ -57,8 +61,8 @@
     --muted: 0 0% 88%; /* Medium light grey */
     --muted-foreground: 0 0% 45%; /* Medium grey */
 
-    --accent: 0 0% 25%; /* Dark grey accent */
-    --accent-foreground: 0 0% 98%;
+    --accent: 41 93% 57%;
+    --accent-foreground: 0 0% 6%;
 
     --border: 0 0% 85%; /* Light grey border */
     --input: 0 0% 90%;
@@ -79,11 +83,21 @@
   }
 
   .cosmic-gradient {
-    background: linear-gradient(135deg, rgba(64, 64, 64, 0.2) 0%, rgba(32, 32, 32, 0.4) 100%);
+    /* Brand gradient using #f8a824 to #fefefe */
+    background: linear-gradient(135deg, rgba(248, 168, 36, 0.25) 0%, rgba(254, 254, 254, 0.12) 100%);
   }
 
   .light-mode .cosmic-gradient {
-    background: linear-gradient(135deg, rgba(230, 230, 230, 0.8) 0%, rgba(200, 200, 200, 0.6) 100%);
+    background: linear-gradient(135deg, rgba(248, 168, 36, 0.15) 0%, rgba(254, 254, 254, 0.9) 100%);
+  }
+
+  /* Reusable brand gradient utility for CTAs */
+  .brand-gradient {
+    background-image: linear-gradient(135deg, #f8a824 0%, #fefefe 100%);
+    color: #121212;
+  }
+  .brand-gradient:hover {
+    filter: brightness(0.98);
   }
 
   .cosmic-glow {

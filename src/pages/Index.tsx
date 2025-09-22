@@ -5,8 +5,12 @@ import HeroSection from '@/components/HeroSection';
 import Features from '@/components/Features';
 import Faculty from '@/components/Faculty';
 import Testimonials from '@/components/Testimonials';
-import Pricing from '@/components/Pricing';
+import AppDownload from '@/components/AppDownload';
+import Mentorship from '@/components/Mentorship';
+import Contact from '@/components/Contact';
+import Policies from '@/components/Policies';
 import Footer from '@/components/Footer';
+import Chatbot from '@/components/Chatbot';
 
 const Index = () => {
   return (
@@ -15,14 +19,15 @@ const Index = () => {
       <main>
         <HeroSection />
         <Features />
+        <Mentorship />
         <Faculty />
         <Testimonials />
-        <Pricing />
-        <div id="mentorship" />
-        <div id="app" />
-        <div id="contact" />
+        <AppDownload />
+        <Contact />
+        <Policies />
       </main>
       <Footer />
+      <Chatbot />
     </div>
   );
 };

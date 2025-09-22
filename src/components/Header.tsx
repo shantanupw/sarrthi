@@ -6,29 +6,48 @@ import { Menu, X, BookOpen, Users, HeartHandshake, Download, Phone, Sun, Moon } 
 import { cn } from '@/lib/utils';
 import { ToggleGroup, ToggleGroupItem } from '@/components/ui/toggle-group';
 import { Switch } from '@/components/ui/switch';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 
 const Header = () => {
   const [activePage, setActivePage] = useState('courses');
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const [isDarkMode, setIsDarkMode] = useState(false); // Default to light mode
+  const [isDarkMode, setIsDarkMode] = useState(() => {
+    try {
+      const saved = localStorage.getItem('theme');
+      return saved === 'dark';
+    } catch {
+      return false;
+    }
+  }); // Default to light mode unless persisted
   
   useEffect(() => {
-    // Apply the theme to the document when it changes
+    // Apply and persist the theme when it changes
     if (isDarkMode) {
       document.documentElement.classList.remove('light-mode');
       document.documentElement.classList.add('dark-mode');
+      try { localStorage.setItem('theme', 'dark'); } catch {}
     } else {
       document.documentElement.classList.remove('dark-mode');
       document.documentElement.classList.add('light-mode');
+      try { localStorage.setItem('theme', 'light'); } catch {}
     }
   }, [isDarkMode]);
   
+  const location = useLocation();
+  const navigate = useNavigate();
+
   const handleNavClick = (page: string) => (e: React.MouseEvent) => {
     e.preventDefault();
     setActivePage(page);
-    const element = document.getElementById(page);
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
+    if (location.pathname === '/') {
+      const element = document.getElementById(page);
+      if (element) {
+        element.scrollIntoView({ behavior: 'smooth' });
+      } else {
+        window.location.hash = `#${page}`;
+      }
+    } else {
+      navigate(`/#${page}`);
     }
     setMobileMenuOpen(false);
   };
@@ -45,7 +64,9 @@ const Header = () => {
     <div className="sticky top-0 z-50 pt-8 px-4">
       <header className="w-full max-w-7xl mx-auto py-3 px-6 md:px-8 flex items-center justify-between">
         <div className="p-3">
-          <Logo />
+          <Link to="/" aria-label="Sarrthi IAS Home" className="inline-flex">
+            <Logo />
+          </Link>
         </div>
         
         {/* Mobile menu button */}
@@ -61,16 +82,6 @@ const Header = () => {
           <div className="rounded-full px-1 py-1 backdrop-blur-md bg-background/80 border border-border shadow-lg">
             <ToggleGroup type="single" value={activePage} onValueChange={(value) => value && setActivePage(value)}>
               <ToggleGroupItem 
-                value="mentorship"
-                className={cn(
-                  "px-4 py-2 rounded-full transition-colors relative",
-                  activePage === 'mentorship' ? 'text-accent-foreground bg-accent' : 'text-muted-foreground hover:text-foreground hover:bg-muted'
-                )}
-                onClick={handleNavClick('mentorship')}
-              >
-                <HeartHandshake size={16} className="inline-block mr-1.5" /> Free Mentorship
-              </ToggleGroupItem>
-              <ToggleGroupItem 
                 value="courses" 
                 className={cn(
                   "px-4 py-2 rounded-full transition-colors relative",
@@ -80,6 +91,17 @@ const Header = () => {
               >
                 <BookOpen size={16} className="inline-block mr-1.5" /> Courses
               </ToggleGroupItem>
+              <ToggleGroupItem 
+                value="mentorship"
+                className={cn(
+                  "px-4 py-2 rounded-full transition-colors relative",
+                  activePage === 'mentorship' ? 'text-accent-foreground bg-accent' : 'text-muted-foreground hover:text-foreground hover:bg-muted'
+                )}
+                onClick={handleNavClick('mentorship')}
+              >
+                <HeartHandshake size={16} className="inline-block mr-1.5" /> Free Mentorship
+              </ToggleGroupItem>
+              
               <ToggleGroupItem 
                 value="faculty" 
                 className={cn(
@@ -110,6 +132,7 @@ const Header = () => {
               >
                 <Phone size={16} className="inline-block mr-1.5" /> Contact Us
               </ToggleGroupItem>
+              
             </ToggleGroup>
           </div>
         </nav>
@@ -164,6 +187,7 @@ const Header = () => {
                 <Phone size={16} className="inline-block mr-1.5" /> Contact Us
               </a>
               
+              
               {/* Add theme toggle for mobile */}
               <div className="flex items-center justify-between px-3 py-2">
                 <span className="text-sm text-muted-foreground">Theme</span>
@@ -193,7 +217,7 @@ const Header = () => {
             <Sun size={18} className={`${!isDarkMode ? 'text-primary' : 'text-muted-foreground'}`} />
           </div>
           <div className="rounded-2xl">
-            <Button variant="default" className="bg-primary text-primary-foreground hover:bg-primary/90">Get Free Callback</Button>
+            <Button variant="default" className="brand-gradient">Get Free Callback</Button>
           </div>
         </div>
       </header>

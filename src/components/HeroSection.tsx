@@ -27,9 +27,9 @@ const HeroSection = () => {
   return (
     <section className="relative min-h-screen flex items-center justify-center py-16 px-6 md:px-12 overflow-hidden">
       {/* Background Effects */}
-      <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-background to-primary/10" />
-      <div className="absolute top-1/4 right-1/4 w-96 h-96 bg-primary/10 rounded-full blur-3xl" />
-      <div className="absolute bottom-1/4 left-1/4 w-64 h-64 bg-accent/20 rounded-full blur-2xl" />
+      <div className="absolute inset-0" style={{background: 'linear-gradient(135deg, rgba(248,168,36,0.12) 0%, rgba(254,254,254,0.06) 100%)'}} />
+      <div className="absolute top-1/4 right-1/4 w-96 h-96" style={{background: 'radial-gradient(circle at center, rgba(248,168,36,0.2), transparent 60%)'}} />
+      <div className="absolute bottom-1/4 left-1/4 w-64 h-64" style={{background: 'radial-gradient(circle at center, rgba(254,254,254,0.18), transparent 60%)'}} />
       
       <div className="relative w-full max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
         {/* Left Column - Content */}

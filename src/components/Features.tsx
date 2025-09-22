@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useMemo, useState } from 'react';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader } from '@/components/ui/card';
@@ -13,28 +13,21 @@ import {
   Calendar
 } from 'lucide-react';
 
+import { useNavigate } from 'react-router-dom';
+
+import { courses as allCourses } from '@/lib/courses';
+
 const Features = () => {
-  const courses = [
+  const navigate = useNavigate();
+  const [activeCategory, setActiveCategory] = useState<string>('All Courses');
+  const courses = allCourses;
+  // Additional courses from content spec
+  courses.push(
     {
-      id: 1,
-      title: "Live GS Foundation Course 2026 Plus",
-      batch: "Batch 5 Plus",
-      startDate: "14th July 2025",
-      price: "₹29,999",
-      features: [
-        "Live Foundation Class",
-        "Flip Learning Method", 
-        "Live Answer Writing Session",
-        "Mains & Interview Preparation",
-        "PYQ-Based Practice"
-      ],
-      popular: true
-    },
-    {
-      id: 2,
-      title: "Live GS Foundation Course 2026",
-      batch: "Batch 5",
-      startDate: "14th July 2025", 
+      id: 5,
+      title: "Live GS Foundation Course 2026 (Batch 4)",
+      batch: "Batch 4",
+      startDate: "26th May 2025",
       price: "₹19,999",
       features: [
         "Live Foundation Class",
@@ -46,35 +39,50 @@ const Features = () => {
       popular: false
     },
     {
-      id: 3,
-      title: "Decode UPSC with AIR 1 Shakti Dubey",
-      batch: "Special Initiative",
-      startDate: "29th May 2024",
-      price: "Free",
+      id: 6,
+      title: "Live GS Foundation Course 2026 Plus (Batch 4)",
+      batch: "Batch 4 Plus",
+      startDate: "26th May 2025",
+      price: "₹29,999",
       features: [
-        "UPSC Strategy",
-        "Beginner Friendly",
-        "Topper Sessions", 
-        "Note-Making",
-        "Answer Writing"
+        "Live Foundation Class",
+        "1:1 Mentorship",
+        "Bi-Weekly Study Plans",
+        "Live Answer Writing Sessions",
+        "Prelims & Mains Revision"
       ],
       popular: false
     },
     {
-      id: 4,
-      title: "Beginners' Kit",
-      batch: "Batch 1",
-      startDate: "2nd July 2025",
-      price: "Contact Us",
+      id: 7,
+      title: "Live GS Foundation Course 2026 Plus (Batch 3)",
+      batch: "Batch 3 Plus",
+      startDate: "1st April 2025",
+      price: "₹29,999",
       features: [
-        "Comprehensive Foundation Building",
-        "Personalized Study Plans",
-        "Answer Writing Sessions",
-        "Motivation and Mindset Development"
+        "Live Foundation Class",
+        "1:1 Mentorship",
+        "Bi-Weekly Study Plans",
+        "Live Answer Writing Sessions",
+        "Prelims & Mains Revision"
+      ],
+      popular: false
+    },
+    {
+      id: 8,
+      title: "Live GS Foundation Course 2026 (Batch 3)",
+      batch: "Batch 3",
+      startDate: "1st April 2025",
+      price: "₹19,999",
+      features: [
+        "Live Foundation Class",
+        "Complete Mains Coverage",
+        "Live Answer Writing Session",
+        "Prelims Revision"
       ],
       popular: false
     }
-  ];
+  );
 
   const categories = [
     "All Courses",
@@ -88,6 +96,27 @@ const Features = () => {
     "Current Affairs",
     "Test Series"
   ];
+
+  const filteredCourses = useMemo(() => {
+    if (activeCategory === 'All Courses') return courses;
+    // Simple mapping based on title keywords
+    return courses.filter(c => {
+      const t = c.title.toLowerCase();
+      const map: Record<string, RegExp> = {
+        'gs foundation': /(foundation)/,
+        'mentorship': /(mentor)/,
+        'gs mains comprehensive': /(mains)\s*(comprehensive)?/,
+        'gs mains modules': /(mains).*?(module)/,
+        'optional': /(optional)/,
+        'csat': /(csat)/,
+        'prelims revision': /(prelims)|(revision)/,
+        'current affairs': /(current\s*affairs)/,
+        'test series': /(test\s*series)/
+      };
+      const regex = map[activeCategory.toLowerCase()];
+      return regex ? regex.test(t) : true;
+    });
+  }, [activeCategory, courses]);
 
   return (
     <section id="courses" className="w-full py-20 px-6 md:px-12 bg-background">
@@ -105,19 +134,19 @@ const Features = () => {
         {/* Course Categories */}
         <div className="flex flex-wrap gap-2 justify-center">
           {categories.map((category, index) => (
-            <Badge
+            <button
               key={index}
-              variant={index === 0 ? "default" : "secondary"}
-              className="px-4 py-2 cursor-pointer hover:bg-primary hover:text-primary-foreground transition-colors"
+              onClick={() => setActiveCategory(category)}
+              className={`px-4 py-2 rounded-md border text-sm transition-colors ${activeCategory === category ? 'brand-gradient border-transparent' : 'bg-card border-border text-foreground hover:bg-muted'}`}
             >
               {category}
-            </Badge>
+            </button>
           ))}
         </div>
 
         {/* Featured Courses Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-8">
-          {courses.map((course, index) => (
+          {filteredCourses.slice(0, 4).map((course, index) => (
             <Card 
               key={course.id}
               className={`relative p-6 border flex flex-col h-full ${
@@ -168,21 +197,27 @@ const Features = () => {
                       <div className="text-sm text-muted-foreground">Inclusive of all taxes</div>
                     )}
                   </div>
-                  <Button 
-                    className={
-                      course.popular 
-                        ? "w-full bg-primary text-primary-foreground hover:bg-primary/90" 
-                        : "w-full border-border text-foreground hover:bg-muted"
-                    }
-                    variant={course.popular ? "default" : "outline"}
-                  >
-                    {course.price === "Free" ? "Join Now" : course.price === "Contact Us" ? "Contact Us" : "Enroll Now"}
-                  </Button>
+                  <div className="grid grid-cols-2 gap-2">
+                    <Button 
+                      className={"w-full brand-gradient"}
+                      variant={"default"}
+                      onClick={() => navigate(`/course/${encodeURIComponent(course.title.toLowerCase().replace(/\s+/g,'-'))}`)}
+                    >
+                      Learn More
+                    </Button>
+                    <Button variant="outline" className="w-full border-border">Contact</Button>
+                  </div>
                 </div>
               </CardContent>
             </Card>
           ))}
         </div>
+
+        {filteredCourses.length > 4 && (
+          <div className="text-center">
+            <Button className="brand-gradient" onClick={() => navigate('/courses')}>Learn more courses</Button>
+          </div>
+        )}
 
         {/* Why Choose Us Section */}
         <div className="mt-20 space-y-12">

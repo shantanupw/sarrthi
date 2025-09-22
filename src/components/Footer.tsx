@@ -10,7 +10,7 @@ const Footer = () => {
           <div className="md:col-span-2 space-y-6">
             <Logo />
             <p className="text-muted-foreground max-w-xs">
-              Modern UPSC preparation for aspirants who value expert guidance, quality content, and proven results.
+              Sarrthi IAS — Credible Faculty, Quality Content, Affordable Courses.
             </p>
             <div className="flex items-center gap-4">
               <a href="#" className="h-10 w-10 rounded-full bg-muted flex items-center justify-center text-muted-foreground hover:text-foreground transition-colors">
@@ -40,35 +40,41 @@ const Footer = () => {
           </div>
           
           <div className="space-y-4">
-            <h4 className="font-medium text-lg text-foreground">Product</h4>
+            <h4 className="font-medium text-lg text-foreground">Overview</h4>
             <ul className="space-y-3">
-              <li><a href="#features" className="text-muted-foreground hover:text-foreground transition-colors">Features</a></li>
-              <li><a href="#" className="text-muted-foreground hover:text-foreground transition-colors">Integrations</a></li>
-              <li><a href="#pricing" className="text-muted-foreground hover:text-foreground transition-colors">Pricing</a></li>
-              <li><a href="#" className="text-muted-foreground hover:text-foreground transition-colors">Updates</a></li>
-              <li><a href="#" className="text-muted-foreground hover:text-foreground transition-colors">Roadmap</a></li>
+              <li><a href="#" className="text-muted-foreground hover:text-foreground transition-colors">Home</a></li>
+              <li><a href="#policies" className="text-muted-foreground hover:text-foreground transition-colors">Privacy Policy</a></li>
+              <li><a href="#policies" className="text-muted-foreground hover:text-foreground transition-colors">Terms & Conditions</a></li>
+              <li><a href="#policies" className="text-muted-foreground hover:text-foreground transition-colors">Refund Policy</a></li>
             </ul>
           </div>
           
           <div className="space-y-4">
-            <h4 className="font-medium text-lg text-foreground">Company</h4>
+            <h4 className="font-medium text-lg text-foreground">Products</h4>
             <ul className="space-y-3">
-              <li><a href="#" className="text-muted-foreground hover:text-foreground transition-colors">About</a></li>
-              <li><a href="#" className="text-muted-foreground hover:text-foreground transition-colors">Blog</a></li>
-              <li><a href="#" className="text-muted-foreground hover:text-foreground transition-colors">Careers</a></li>
-              <li><a href="#" className="text-muted-foreground hover:text-foreground transition-colors">Press</a></li>
-              <li><a href="#" className="text-muted-foreground hover:text-foreground transition-colors">Contact</a></li>
+              <li><a href="#courses" className="text-muted-foreground hover:text-foreground transition-colors">GS Foundation</a></li>
+              <li><a href="#courses" className="text-muted-foreground hover:text-foreground transition-colors">GS Mains Comprehensive</a></li>
+              <li><a href="#courses" className="text-muted-foreground hover:text-foreground transition-colors">GS Mains Modules</a></li>
+              <li><a href="#courses" className="text-muted-foreground hover:text-foreground transition-colors">Optional</a></li>
             </ul>
           </div>
           
           <div className="space-y-4">
-            <h4 className="font-medium text-lg text-foreground">Resources</h4>
+            <h4 className="font-medium text-lg text-foreground">Follow Us On</h4>
             <ul className="space-y-3">
-              <li><a href="#" className="text-muted-foreground hover:text-foreground transition-colors">Documentation</a></li>
-              <li><a href="#" className="text-muted-foreground hover:text-foreground transition-colors">Help Center</a></li>
-              <li><a href="#" className="text-muted-foreground hover:text-foreground transition-colors">Guides & Tutorials</a></li>
-              <li><a href="#" className="text-muted-foreground hover:text-foreground transition-colors">API Reference</a></li>
-              <li><a href="#" className="text-muted-foreground hover:text-foreground transition-colors">Community</a></li>
+              <li><a href="#" className="text-muted-foreground hover:text-foreground transition-colors">YouTube</a></li>
+              <li><a href="#" className="text-muted-foreground hover:text-foreground transition-colors">Instagram</a></li>
+              <li><a href="#" className="text-muted-foreground hover:text-foreground transition-colors">Telegram</a></li>
+              <li><a href="#" className="text-muted-foreground hover:text-foreground transition-colors">LinkedIn</a></li>
+            </ul>
+          </div>
+          
+          <div className="space-y-4">
+            <h4 className="font-medium text-lg text-foreground">Contact Us</h4>
+            <ul className="space-y-3 text-muted-foreground">
+              <li>Phone: <a href="tel:+919569093856" className="hover:text-foreground transition-colors">+91 95690 93856</a></li>
+              <li>Email: <a href="mailto:ask@sarrthi.com" className="hover:text-foreground transition-colors">ask@sarrthi.com</a></li>
+              <li>Address: Shop No -6, 2nd Floor, Front Side, Sarrthi IAS, Near Grover Mithaivala, Bada Bazar Rd, Delhi, 110060</li>
             </ul>
           </div>
         </div>
@@ -76,9 +82,9 @@ const Footer = () => {
         <div className="mt-16 pt-8 border-t border-border flex flex-col md:flex-row justify-between items-center text-muted-foreground text-sm">
           <div>© 2025 Sarrthi IAS. All rights reserved.</div>
           <div className="flex gap-6 mt-4 md:mt-0">
-            <a href="#" className="hover:text-foreground transition-colors">Privacy</a>
-            <a href="#" className="hover:text-foreground transition-colors">Terms</a>
-            <a href="#" className="hover:text-foreground transition-colors">Cookies</a>
+            <a href="#policies" className="hover:text-foreground transition-colors">Privacy</a>
+            <a href="#policies" className="hover:text-foreground transition-colors">Terms</a>
+            <a href="#policies" className="hover:text-foreground transition-colors">Refunds</a>
           </div>
         </div>
       </div>
