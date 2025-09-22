@@ -1,63 +1,68 @@
-
 import React from 'react';
+import { Card, CardContent } from '@/components/ui/card';
+import { Badge } from '@/components/ui/badge';
+import { Star, Quote } from 'lucide-react';
 
 const Testimonials = () => {
   const testimonials = [
     {
-      quote: "Our payment processing efficiency increased by 40% and transaction failures dropped to near zero. The automation features are game-changing.",
-      author: "Sarah Johnson",
-      position: "CFO at TechCorp",
-      avatar: "bg-cosmic-light/30"
+      name: "Priya Sharma",
+      rank: "AIR 45, UPSC CSE 2023",
+      course: "GS Foundation Plus",
+      content: "Sarrthi IAS provided me with the perfect foundation for UPSC preparation. The faculty's expertise, especially Varun Sir's mentorship, was instrumental in my success.",
+      rating: 5
     },
     {
-      quote: "The real-time analytics and fraud detection capabilities have saved us millions. We can spot issues before they become problems.",
-      author: "Michael Chen",
-      position: "Head of Risk at FinanceFlow",
-      avatar: "bg-cosmic-light/20"
+      name: "Rohit Kumar", 
+      rank: "AIR 127, UPSC CSE 2023",
+      course: "Live GS Foundation",
+      content: "The comprehensive curriculum and experienced faculty at Sarrthi IAS made all the difference. Dr. Shivin Chaudhary's economics classes were outstanding.",
+      rating: 5
     },
     {
-      quote: "Compliance used to be a nightmare. Now our regulatory reporting is automated and we're always audit-ready.",
-      author: "Leila Rodriguez",
-      position: "Operations Director at GlobalPay",
-      avatar: "bg-cosmic-light/40"
+      name: "Anjali Patel",
+      rank: "AIR 89, UPSC CSE 2022", 
+      course: "Complete Course Package",
+      content: "I'm grateful to Sarrthi IAS for their excellent guidance throughout my UPSC journey. The faculty's practical approach kept me motivated.",
+      rating: 5
     }
   ];
-  
+
   return (
-    <section className="w-full py-20 px-6 md:px-12 bg-card relative overflow-hidden">
-      {/* Background grid */}
-      <div className="absolute inset-0 cosmic-grid opacity-20"></div>
-      
-      <div className="max-w-7xl mx-auto space-y-16 relative z-10">
+    <section className="w-full py-20 px-6 md:px-12 bg-muted/20">
+      <div className="max-w-7xl mx-auto space-y-16">
         <div className="text-center space-y-4 max-w-3xl mx-auto">
           <h2 className="text-3xl md:text-4xl font-medium tracking-tighter text-foreground">
-            Trusted by finance teams worldwide
+            Success Stories from Our Students
           </h2>
           <p className="text-muted-foreground text-lg">
-            See how our platform transforms financial operations for businesses
+            Hear from UPSC toppers who achieved their dreams with Sarrthi IAS guidance
           </p>
         </div>
-        
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {testimonials.map((testimonial, index) => (
-            <div 
-              key={index}
-              className="p-6 rounded-xl border border-border bg-background/80 backdrop-blur-sm hover:border-border/60 transition-all duration-300"
-            >
-              <div className="mb-6">
-                {[...Array(5)].map((_, i) => (
-                  <span key={i} className="text-primary inline-block mr-1">★</span>
-                ))}
-              </div>
-              <p className="text-lg mb-8 text-foreground/90 italic">"{testimonial.quote}"</p>
-              <div className="flex items-center gap-4">
-                <div className={`h-12 w-12 rounded-full ${testimonial.avatar} bg-muted`}></div>
-                <div>
-                  <h4 className="font-medium text-foreground">{testimonial.author}</h4>
-                  <p className="text-sm text-muted-foreground">{testimonial.position}</p>
+            <Card key={index} className="p-6 border-border bg-card">
+              <CardContent className="p-0 space-y-4">
+                <div className="w-8 h-8 bg-primary/10 rounded-full flex items-center justify-center">
+                  <Quote className="w-4 h-4 text-primary" />
                 </div>
-              </div>
-            </div>
+                <div className="flex items-center gap-1">
+                  {[...Array(testimonial.rating)].map((_, i) => (
+                    <Star key={i} className="w-4 h-4 fill-yellow-400 text-yellow-400" />
+                  ))}
+                </div>
+                <p className="text-muted-foreground text-sm">
+                  "{testimonial.content}"
+                </p>
+                <div className="pt-4 border-t border-border">
+                  <h4 className="font-semibold text-foreground">{testimonial.name}</h4>
+                  <Badge variant="default" className="w-fit text-xs mt-1">
+                    {testimonial.rank}
+                  </Badge>
+                </div>
+              </CardContent>
+            </Card>
           ))}
         </div>
       </div>
