@@ -5,31 +5,34 @@ import { Label } from '@/components/ui/label';
 import { Card, CardContent } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Check, Phone, Users, Award, BookOpen } from 'lucide-react';
-
 const HeroSection = () => {
   const [name, setName] = useState('');
   const [phone, setPhone] = useState('');
-
-  const credentials = [
-    "4 UPSC Mains",
-    "2 Interviews", 
-    "IIT Roorkee",
-    "AIR 297, UPSC CSE 2022",
-    "Ex IRS, Ex IPS"
-  ];
-
-  const stats = [
-    { icon: Users, number: "450+", label: "Rankers Mentored" },
-    { icon: Award, number: "25+", label: "Years Experience" },
-    { icon: BookOpen, number: "700+", label: "Hours of Content" }
-  ];
-
-  return (
-    <section className="relative min-h-screen flex items-center justify-center py-16 px-6 md:px-12 overflow-hidden">
+  const credentials = ["4 UPSC Mains", "2 Interviews", "IIT Roorkee", "AIR 297, UPSC CSE 2022", "Ex IRS, Ex IPS"];
+  const stats = [{
+    icon: Users,
+    number: "450+",
+    label: "Rankers Mentored"
+  }, {
+    icon: Award,
+    number: "25+",
+    label: "Years Experience"
+  }, {
+    icon: BookOpen,
+    number: "700+",
+    label: "Hours of Content"
+  }];
+  return <section className="relative min-h-screen flex items-center justify-center py-16 px-6 md:px-12 overflow-hidden">
       {/* Background Effects */}
-      <div className="absolute inset-0" style={{background: 'linear-gradient(135deg, rgba(248,168,36,0.12) 0%, rgba(254,254,254,0.06) 100%)'}} />
-      <div className="absolute top-1/4 right-1/4 w-96 h-96" style={{background: 'radial-gradient(circle at center, rgba(248,168,36,0.2), transparent 60%)'}} />
-      <div className="absolute bottom-1/4 left-1/4 w-64 h-64" style={{background: 'radial-gradient(circle at center, rgba(254,254,254,0.18), transparent 60%)'}} />
+      <div className="absolute inset-0" style={{
+      background: 'linear-gradient(135deg, rgba(248,168,36,0.12) 0%, rgba(254,254,254,0.06) 100%)'
+    }} />
+      <div className="absolute top-1/4 right-1/4 w-96 h-96" style={{
+      background: 'radial-gradient(circle at center, rgba(248,168,36,0.2), transparent 60%)'
+    }} />
+      <div className="absolute bottom-1/4 left-1/4 w-64 h-64" style={{
+      background: 'radial-gradient(circle at center, rgba(254,254,254,0.18), transparent 60%)'
+    }} />
       
       <div className="relative w-full max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
         {/* Left Column - Content */}
@@ -45,13 +48,7 @@ const HeroSection = () => {
           </div>
 
           {/* Credentials */}
-          <div className="flex flex-wrap gap-2">
-            {credentials.map((credential, index) => (
-              <Badge key={index} variant="secondary" className="px-3 py-1 text-sm">
-                {credential}
-              </Badge>
-            ))}
-          </div>
+          
 
           {/* Main Headline */}
           <div className="space-y-4">
@@ -68,15 +65,13 @@ const HeroSection = () => {
           {/* Stats */}
           <div className="grid grid-cols-3 gap-6">
             {stats.map((stat, index) => {
-              const Icon = stat.icon;
-              return (
-                <div key={index} className="text-center space-y-2">
+            const Icon = stat.icon;
+            return <div key={index} className="text-center space-y-2">
                   <Icon className="w-8 h-8 mx-auto text-primary" />
                   <div className="font-bold text-2xl text-foreground">{stat.number}</div>
                   <div className="text-sm text-muted-foreground">{stat.label}</div>
-                </div>
-              );
-            })}
+                </div>;
+          })}
           </div>
         </div>
 
@@ -96,17 +91,10 @@ const HeroSection = () => {
                 </p>
               </div>
 
-              <form className="space-y-4" onSubmit={(e) => e.preventDefault()}>
+              <form className="space-y-4" onSubmit={e => e.preventDefault()}>
                 <div className="space-y-2">
                   <Label htmlFor="name" className="text-foreground">Name *</Label>
-                  <Input
-                    id="name"
-                    type="text"
-                    placeholder="Enter your full name"
-                    value={name}
-                    onChange={(e) => setName(e.target.value)}
-                    className="bg-background border-border"
-                  />
+                  <Input id="name" type="text" placeholder="Enter your full name" value={name} onChange={e => setName(e.target.value)} className="bg-background border-border" />
                 </div>
 
                 <div className="space-y-2">
@@ -115,22 +103,11 @@ const HeroSection = () => {
                     <div className="flex items-center px-3 bg-muted border border-r-0 border-border rounded-l-md text-muted-foreground">
                       +91
                     </div>
-                    <Input
-                      id="phone"
-                      type="tel"
-                      placeholder="Enter mobile number"
-                      value={phone}
-                      onChange={(e) => setPhone(e.target.value)}
-                      className="rounded-l-none bg-background border-border"
-                    />
+                    <Input id="phone" type="tel" placeholder="Enter mobile number" value={phone} onChange={e => setPhone(e.target.value)} className="rounded-l-none bg-background border-border" />
                   </div>
                 </div>
 
-                <Button 
-                  type="submit" 
-                  className="w-full bg-primary text-primary-foreground hover:bg-primary/90"
-                  size="lg"
-                >
+                <Button type="submit" className="w-full bg-primary text-primary-foreground hover:bg-primary/90" size="lg">
                   Get Free Callback
                 </Button>
 
@@ -150,8 +127,6 @@ const HeroSection = () => {
           </Card>
         </div>
       </div>
-    </section>
-  );
+    </section>;
 };
-
 export default HeroSection;
