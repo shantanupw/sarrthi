@@ -5,7 +5,7 @@ import { courses } from '@/lib/courses';
 import { Card, CardContent, CardHeader } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
-import { CheckCircle, Calendar } from 'lucide-react';
+import { CheckCircle, Calendar, BookOpen } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 
 const Courses = () => {
@@ -126,11 +126,20 @@ const Courses = () => {
 
               <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
             {filtered.map(course => (
-              <Card key={course.id} className={`relative p-6 border flex flex-col h-full ${course.popular ? 'border-primary/50 cosmic-glow bg-card' : 'border-border bg-card'}`}>
+              <Card key={course.id} className={`relative p-6 border flex flex-col h-full ${course.popular ? 'border-primary/50 shadow-lg bg-card' : 'border-border bg-card'}`}>
+                
+                {/* Course Thumbnail */}
+                <div className="w-full h-32 bg-muted rounded-lg mb-4 flex items-center justify-center">
+                  <div className="text-center text-muted-foreground">
+                    <BookOpen className="w-8 h-8 mx-auto mb-2" />
+                    <span className="text-sm">Course Thumbnail</span>
+                  </div>
+                </div>
+                
                 <CardHeader className="p-0 pb-4">
                   <div className="space-y-2">
                     <div className="flex items-center justify-between">
-                      <Badge variant="outline" className="text-xs">{course.batch}</Badge>
+                      <Badge variant="outline" className="text-xs border-strong">{course.batch}</Badge>
                       <div className="flex items-center gap-1 text-xs text-muted-foreground"><Calendar className="w-3 h-3" />{course.startDate}</div>
                     </div>
                     <h3 className="text-xl font-semibold tracking-tight">{course.title}</h3>
@@ -147,7 +156,7 @@ const Courses = () => {
                       <div className="text-2xl font-bold">{course.price}</div>
                       {course.price !== 'Free' && course.price !== 'Contact Us' && <div className="text-sm text-muted-foreground">Inclusive of all taxes</div>}
                     </div>
-                    <Button className="brand-gradient w-full" onClick={() => navigate(`/course/${course.slug}`)}>Learn More</Button>
+                    <Button variant="default" className="w-full" onClick={() => navigate(`/course/${course.slug}`)}>Learn More</Button>
                   </div>
                 </CardContent>
               </Card>

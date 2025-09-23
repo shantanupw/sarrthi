@@ -7,6 +7,40 @@
 
 @layer base {
   :root {
+    --background: 0 0% 97%; /* Professional light grey */
+    --foreground: 0 0% 15%; /* Dark grey text */
+
+    --card: 0 0% 100%; /* Pure white cards */
+    --card-foreground: 0 0% 15%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 0 0% 15%;
+
+    /* Professional blue-grey primary */
+    --primary: 210 40% 25%;
+    --primary-foreground: 0 0% 98%;
+
+    --secondary: 210 20% 92%; /* Light blue-grey */
+    --secondary-foreground: 210 40% 25%;
+
+    --muted: 210 20% 95%; /* Very light blue-grey */
+    --muted-foreground: 0 0% 45%; /* Medium grey */
+
+    /* Professional accent */
+    --accent: 210 40% 25%;
+    --accent-foreground: 0 0% 98%;
+
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 210 40% 98%;
+
+    --border: 0 0% 85%; /* Light grey border */
+    --input: 0 0% 100%;
+    --ring: 210 40% 25%;
+
+    --radius: 0.5rem;
+  }
+
+  .dark-mode {
     --background: 0 0% 8%; /* Dark charcoal */
     --foreground: 0 0% 95%; /* Light grey/white */
 
@@ -16,9 +50,7 @@
     --popover: 0 0% 12%;
     --popover-foreground: 0 0% 95%;
 
-    /* Primary color replaced with #f8a824 (amber) */
-    --primary: 41 93% 57%;
-    /* Foreground for primary set to near black on light bg and white on dark contexts */
+    --primary: 210 40% 60%;
     --primary-foreground: 0 0% 10%;
 
     --secondary: 0 0% 18%; /* Medium charcoal */
@@ -27,46 +59,12 @@
     --muted: 0 0% 22%; /* Lighter charcoal */
     --muted-foreground: 0 0% 70%; /* Medium grey */
 
-    /* Accent can mirror primary for cohesive brand */
-    --accent: 41 93% 57%;
+    --accent: 210 40% 60%;
     --accent-foreground: 0 0% 10%;
-
-    --destructive: 0 84% 60%;
-    --destructive-foreground: 210 40% 98%;
 
     --border: 0 0% 22%; /* Medium charcoal border */
     --input: 0 0% 22%;
     --ring: 0 0% 85%; /* Light grey ring */
-
-    --radius: 0.5rem;
-  }
-
-  .light-mode {
-    --background: 0 0% 98%; /* Very light grey */
-    --foreground: 0 0% 20%; /* Dark grey */
-
-    --card: 0 0% 96%; /* Light grey card */
-    --card-foreground: 0 0% 20%;
-
-    --popover: 0 0% 96%;
-    --popover-foreground: 0 0% 20%;
-
-    /* Light mode primary remains brand amber */
-    --primary: 41 93% 57%;
-    --primary-foreground: 0 0% 6%;
-
-    --secondary: 0 0% 92%; /* Light grey secondary */
-    --secondary-foreground: 0 0% 25%;
-
-    --muted: 0 0% 88%; /* Medium light grey */
-    --muted-foreground: 0 0% 45%; /* Medium grey */
-
-    --accent: 41 93% 57%;
-    --accent-foreground: 0 0% 6%;
-
-    --border: 0 0% 85%; /* Light grey border */
-    --input: 0 0% 90%;
-    --ring: 0 0% 25%; /* Dark grey ring */
   }
 
   * {
@@ -91,13 +89,29 @@
     background: linear-gradient(135deg, rgba(248, 168, 36, 0.15) 0%, rgba(254, 254, 254, 0.9) 100%);
   }
 
-  /* Reusable brand gradient utility for CTAs */
+  /* Professional brand gradient utility for CTAs */
   .brand-gradient {
-    background-image: linear-gradient(135deg, #f8a824 0%, #fefefe 100%);
-    color: #121212;
+    background: hsl(var(--primary));
+    color: hsl(var(--primary-foreground));
   }
   .brand-gradient:hover {
-    filter: brightness(0.98);
+    background: hsl(var(--primary) / 0.9);
+  }
+  
+  /* Professional bordered variant */
+  .brand-bordered {
+    border: 2px solid hsl(var(--primary));
+    background: transparent;
+    color: hsl(var(--primary));
+  }
+  .brand-bordered:hover {
+    background: hsl(var(--primary));
+    color: hsl(var(--primary-foreground));
+  }
+  
+  /* Solid black borders for emphasis */
+  .border-strong {
+    border-color: hsl(0 0% 0%);
   }
 
   .cosmic-glow {

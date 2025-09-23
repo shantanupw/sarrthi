@@ -154,79 +154,94 @@ const Features = () => {
         </div>
 
         {/* Featured Courses Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-8">
-          {filteredCourses.slice(0, 4).map((course, index) => (
-            <Card 
-              key={course.id}
-              className={`relative p-6 border flex flex-col h-full ${
-                course.popular 
-                  ? "border-primary/50 cosmic-glow bg-card" 
-                  : "border-border bg-card"
-              } transition-all duration-300`}
-            >
-              {course.popular && (
-                <div className="absolute -top-4 left-1/2 -translate-x-1/2 px-4 py-1 bg-primary text-primary-foreground text-sm rounded-full font-medium">
-                  Most Popular
-                </div>
-              )}
-
-              <CardHeader className="p-0 pb-4">
-                <div className="space-y-2">
-                  <div className="flex items-center justify-between">
-                    <Badge variant="outline" className="text-xs">
-                      {course.batch}
-                    </Badge>
-                    <div className="flex items-center gap-1 text-xs text-muted-foreground">
-                      <Calendar className="w-3 h-3" />
-                      {course.startDate}
+        <div className="relative">
+          <div className="overflow-x-auto pb-4">
+            <div className="flex gap-6 min-w-max px-4">
+              {filteredCourses.slice(0, 6).map((course, index) => (
+                <Card 
+                  key={course.id}
+                  className={`relative p-6 border flex flex-col h-full w-80 flex-shrink-0 ${
+                    course.popular 
+                      ? "border-primary/50 shadow-lg bg-card" 
+                      : "border-border bg-card"
+                  } transition-all duration-300`}
+                >
+                  {course.popular && (
+                    <div className="absolute -top-4 left-1/2 -translate-x-1/2 px-4 py-1 bg-primary text-primary-foreground text-sm rounded-full font-medium">
+                      Most Popular
+                    </div>
+                  )}
+                  
+                  {/* Course Thumbnail */}
+                  <div className="w-full h-32 bg-muted rounded-lg mb-4 flex items-center justify-center">
+                    <div className="text-center text-muted-foreground">
+                      <BookOpen className="w-8 h-8 mx-auto mb-2" />
+                      <span className="text-sm">Course Thumbnail</span>
                     </div>
                   </div>
-                  <h3 className="text-xl font-semibold tracking-tight text-foreground leading-tight">
-                    {course.title}
-                  </h3>
-                </div>
-              </CardHeader>
 
-              <CardContent className="p-0 flex-grow flex flex-col justify-between">
-                <div className="space-y-4 mb-6">
-                  <div className="space-y-3">
-                    {course.features.map((feature, i) => (
-                      <div key={i} className="flex items-center gap-3">
-                        <CheckCircle className="w-4 h-4 text-green-500 flex-shrink-0" />
-                        <span className="text-sm text-foreground">{feature}</span>
+                  <CardHeader className="p-0 pb-4">
+                    <div className="space-y-2">
+                      <div className="flex items-center justify-between">
+                        <Badge variant="outline" className="text-xs border-strong">
+                          {course.batch}
+                        </Badge>
+                        <div className="flex items-center gap-1 text-xs text-muted-foreground">
+                          <Calendar className="w-3 h-3" />
+                          {course.startDate}
+                        </div>
                       </div>
-                    ))}
-                  </div>
-                </div>
+                      <h3 className="text-lg font-semibold tracking-tight text-foreground leading-tight">
+                        {course.title}
+                      </h3>
+                    </div>
+                  </CardHeader>
 
-                <div className="space-y-4">
-                  <div className="flex items-center justify-between">
-                    <div className="text-2xl font-bold text-foreground">{course.price}</div>
-                    {course.price !== "Free" && course.price !== "Contact Us" && (
-                      <div className="text-sm text-muted-foreground">Inclusive of all taxes</div>
-                    )}
-                  </div>
-                  <div className="grid grid-cols-2 gap-2">
-                    <Button 
-                      className={"w-full brand-gradient"}
-                      variant={"default"}
-                      onClick={() => navigate(`/course/${encodeURIComponent(course.title.toLowerCase().replace(/\s+/g,'-'))}`)}
-                    >
-                      Learn More
-                    </Button>
-                    <ContactDialog>
-                      <Button variant="outline" className="w-full border-border">Contact</Button>
-                    </ContactDialog>
-                  </div>
-                </div>
-              </CardContent>
-            </Card>
-          ))}
+                  <CardContent className="p-0 flex-grow flex flex-col justify-between">
+                    <div className="space-y-3 mb-6">
+                      <div className="space-y-2">
+                        {course.features.slice(0, 3).map((feature, i) => (
+                          <div key={i} className="flex items-center gap-3">
+                            <CheckCircle className="w-4 h-4 text-green-500 flex-shrink-0" />
+                            <span className="text-sm text-foreground">{feature}</span>
+                          </div>
+                        ))}
+                        {course.features.length > 3 && (
+                          <p className="text-xs text-muted-foreground">+{course.features.length - 3} more features</p>
+                        )}
+                      </div>
+                    </div>
+
+                    <div className="space-y-3">
+                      <div className="flex items-center justify-between">
+                        <div className="text-xl font-bold text-foreground">{course.price}</div>
+                        {course.price !== "Free" && course.price !== "Contact Us" && (
+                          <div className="text-xs text-muted-foreground">Incl. taxes</div>
+                        )}
+                      </div>
+                      <div className="grid grid-cols-2 gap-2">
+                        <Button 
+                          variant="default"
+                          className="w-full"
+                          onClick={() => navigate(`/course/${encodeURIComponent(course.title.toLowerCase().replace(/\s+/g,'-'))}`)}
+                        >
+                          Learn More
+                        </Button>
+                        <ContactDialog>
+                          <Button variant="bordered-strong" className="w-full">Contact</Button>
+                        </ContactDialog>
+                      </div>
+                    </div>
+                  </CardContent>
+                </Card>
+              ))}
+            </div>
+          </div>
         </div>
 
-        {filteredCourses.length > 4 && (
+        {filteredCourses.length > 6 && (
           <div className="text-center">
-            <Button className="brand-gradient" onClick={() => navigate('/courses')}>Load more</Button>
+            <Button variant="bordered" onClick={() => navigate('/courses')}>Load more</Button>
           </div>
         )}
 
