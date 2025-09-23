@@ -13,6 +13,7 @@ import {
   Calendar
 } from 'lucide-react';
 
+import ContactDialog from '@/components/ContactDialog';
 import { useNavigate } from 'react-router-dom';
 
 import { courses as allCourses } from '@/lib/courses';
@@ -24,8 +25,9 @@ const Features = () => {
   // Additional courses from content spec
   courses.push(
     {
-      id: 5,
+      id: 9,
       title: "Live GS Foundation Course 2026 (Batch 4)",
+      slug: "live-gs-foundation-course-2026-batch-4-additional",
       batch: "Batch 4",
       startDate: "26th May 2025",
       price: "₹19,999",
@@ -36,11 +38,13 @@ const Features = () => {
         "Mains & Interview Preparation",
         "PYQ-Based Practice"
       ],
-      popular: false
+      popular: false,
+      tags: ["GS Foundation"]
     },
     {
-      id: 6,
+      id: 10,
       title: "Live GS Foundation Course 2026 Plus (Batch 4)",
+      slug: "live-gs-foundation-course-2026-plus-batch-4-additional",
       batch: "Batch 4 Plus",
       startDate: "26th May 2025",
       price: "₹29,999",
@@ -51,11 +55,13 @@ const Features = () => {
         "Live Answer Writing Sessions",
         "Prelims & Mains Revision"
       ],
-      popular: false
+      popular: false,
+      tags: ["GS Foundation"]
     },
     {
-      id: 7,
+      id: 11,
       title: "Live GS Foundation Course 2026 Plus (Batch 3)",
+      slug: "live-gs-foundation-course-2026-plus-batch-3-additional",
       batch: "Batch 3 Plus",
       startDate: "1st April 2025",
       price: "₹29,999",
@@ -66,11 +72,13 @@ const Features = () => {
         "Live Answer Writing Sessions",
         "Prelims & Mains Revision"
       ],
-      popular: false
+      popular: false,
+      tags: ["GS Foundation"]
     },
     {
-      id: 8,
+      id: 12,
       title: "Live GS Foundation Course 2026 (Batch 3)",
+      slug: "live-gs-foundation-course-2026-batch-3-additional",
       batch: "Batch 3",
       startDate: "1st April 2025",
       price: "₹19,999",
@@ -80,7 +88,8 @@ const Features = () => {
         "Live Answer Writing Session",
         "Prelims Revision"
       ],
-      popular: false
+      popular: false,
+      tags: ["GS Foundation"]
     }
   );
 
@@ -205,7 +214,9 @@ const Features = () => {
                     >
                       Learn More
                     </Button>
-                    <Button variant="outline" className="w-full border-border">Contact</Button>
+                    <ContactDialog>
+                      <Button variant="outline" className="w-full border-border">Contact</Button>
+                    </ContactDialog>
                   </div>
                 </div>
               </CardContent>
@@ -215,7 +226,7 @@ const Features = () => {
 
         {filteredCourses.length > 4 && (
           <div className="text-center">
-            <Button className="brand-gradient" onClick={() => navigate('/courses')}>Learn more courses</Button>
+            <Button className="brand-gradient" onClick={() => navigate('/courses')}>Load more</Button>
           </div>
         )}
 

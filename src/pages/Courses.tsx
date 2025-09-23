@@ -14,6 +14,8 @@ const Courses = () => {
   const [selectedTags, setSelectedTags] = useState<string[]>([]);
   const [price, setPrice] = useState<'All' | 'Free' | 'Paid' | 'Contact'>('All');
   const [popularOnly, setPopularOnly] = useState(false);
+  const [batch, setBatch] = useState<string>('All');
+  const [level, setLevel] = useState<string>('All');
 
   const tags = useMemo(() => {
     try {
@@ -33,12 +35,17 @@ const Courses = () => {
         const priceVal = c.price || '';
         const matchesPrice = price === 'All' ? true : price === 'Free' ? priceVal === 'Free' : price === 'Contact' ? priceVal === 'Contact Us' : priceVal !== 'Free' && priceVal !== 'Contact Us';
         const matchesPopular = popularOnly ? !!c.popular : true;
-        return matchesSearch && matchesTags && matchesPrice && matchesPopular;
+        const matchesBatch = batch === 'All' ? true : (c.batch || '').toLowerCase().includes(batch.toLowerCase());
+        const matchesLevel = level === 'All' ? true : 
+          level === 'Foundation' ? (c.title || '').toLowerCase().includes('foundation') :
+          level === 'Mains' ? (c.title || '').toLowerCase().includes('mains') :
+          level === 'Prelims' ? (c.title || '').toLowerCase().includes('prelims') : true;
+        return matchesSearch && matchesTags && matchesPrice && matchesPopular && matchesBatch && matchesLevel;
       });
     } catch {
       return courses;
     }
-  }, [search, selectedTags, price, popularOnly]);
+  }, [search, selectedTags, price, popularOnly, batch, level]);
 
   return (
     <div className="min-h-screen flex flex-col bg-background text-foreground">
@@ -86,11 +93,27 @@ const Courses = () => {
                     </label>
                   ))}
                 </div>
+                <div className="space-y-2">
+                  <div className="text-sm text-muted-foreground">Batch</div>
+                  {(['All', 'Batch 5', 'Batch 4', 'Batch 3'] as const).map(b => (
+                    <label key={b} className="flex items-center gap-2 text-sm">
+                      <input type="radio" name="batch" checked={batch===b} onChange={() => setBatch(b)} /> {b}
+                    </label>
+                  ))}
+                </div>
+                <div className="space-y-2">
+                  <div className="text-sm text-muted-foreground">Course Level</div>
+                  {(['All', 'Foundation', 'Mains', 'Prelims'] as const).map(l => (
+                    <label key={l} className="flex items-center gap-2 text-sm">
+                      <input type="radio" name="level" checked={level===l} onChange={() => setLevel(l)} /> {l}
+                    </label>
+                  ))}
+                </div>
                 <label className="flex items-center gap-2 text-sm">
                   <input type="checkbox" checked={popularOnly} onChange={(e) => setPopularOnly(e.target.checked)} /> Popular only
                 </label>
                 <div className="pt-2">
-                  <button className="text-xs text-muted-foreground hover:text-foreground" onClick={() => { setSearch(''); setSelectedTags([]); setPrice('All'); setPopularOnly(false); }}>Clear all</button>
+                  <button className="text-xs text-muted-foreground hover:text-foreground" onClick={() => { setSearch(''); setSelectedTags([]); setPrice('All'); setPopularOnly(false); setBatch('All'); setLevel('All'); }}>Clear all</button>
                 </div>
               </div>
             </aside>
