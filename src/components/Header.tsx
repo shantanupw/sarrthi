@@ -2,7 +2,7 @@
 import React, { useState, useEffect } from 'react';
 import { Button } from '@/components/ui/button';
 import Logo from './Logo';
-import { Menu, X, BookOpen, Users, HeartHandshake, Download, Phone, Sun, Moon } from 'lucide-react';
+import { Menu, X, BookOpen, Users, HeartHandshake, LayoutDashboard, Phone, Sun, Moon } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { ToggleGroup, ToggleGroupItem } from '@/components/ui/toggle-group';
 import { Switch } from '@/components/ui/switch';
@@ -113,14 +113,14 @@ const Header = () => {
                 <Users size={16} className="inline-block mr-1.5" /> Faculty
               </ToggleGroupItem>
               <ToggleGroupItem 
-                value="app" 
+                value="dashboard" 
                 className={cn(
                   "px-4 py-2 rounded-full transition-colors relative",
-                  activePage === 'app' ? 'text-accent-foreground bg-accent' : 'text-muted-foreground hover:text-foreground hover:bg-muted'
+                  activePage === 'dashboard' ? 'text-accent-foreground bg-accent' : 'text-muted-foreground hover:text-foreground hover:bg-muted'
                 )}
-                onClick={handleNavClick('app')}
+                onClick={() => navigate('/dashboard')}
               >
-                <Download size={16} className="inline-block mr-1.5" /> Download App
+                <LayoutDashboard size={16} className="inline-block mr-1.5" /> Dashboard
               </ToggleGroupItem>
               <ToggleGroupItem 
                 value="contact" 
@@ -168,15 +168,15 @@ const Header = () => {
               >
                 <Users size={16} className="inline-block mr-1.5" /> Faculty
               </a>
-              <a 
-                href="#app" 
+              <Link 
+                to="/dashboard" 
                 className={`px-3 py-2 text-sm rounded-md transition-colors ${
-                  activePage === 'app' ? 'bg-accent text-accent-foreground' : 'text-muted-foreground hover:text-foreground hover:bg-muted'
+                  location.pathname === '/dashboard' ? 'bg-accent text-accent-foreground' : 'text-muted-foreground hover:text-foreground hover:bg-muted'
                 }`}
-                onClick={handleNavClick('app')}
+                onClick={() => setMobileMenuOpen(false)}
               >
-                <Download size={16} className="inline-block mr-1.5" /> Download App
-              </a>
+                <LayoutDashboard size={16} className="inline-block mr-1.5" /> Dashboard
+              </Link>
               <a 
                 href="#contact" 
                 className={`px-3 py-2 text-sm rounded-md transition-colors ${
