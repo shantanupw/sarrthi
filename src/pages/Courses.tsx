@@ -5,7 +5,7 @@ import { courses } from '@/lib/courses';
 import { Card, CardContent, CardHeader } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Button } from '@/components/ui/button';
-import { CheckCircle, Calendar, BookOpen } from 'lucide-react';
+import { CheckCircle, Calendar, BookOpen, ChevronLeft, ChevronRight } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 
 const Courses = () => {
@@ -16,6 +16,8 @@ const Courses = () => {
   const [popularOnly, setPopularOnly] = useState(false);
   const [batch, setBatch] = useState<string>('All');
   const [level, setLevel] = useState<string>('All');
+  const [currentPage, setCurrentPage] = useState(1);
+  const [coursesPerPage] = useState(6);
 
   const tags = useMemo(() => {
     try {
@@ -46,6 +48,22 @@ const Courses = () => {
       return courses;
     }
   }, [search, selectedTags, price, popularOnly, batch, level]);
+
+  // Pagination logic
+  const totalPages = Math.ceil(filtered.length / coursesPerPage);
+  const startIndex = (currentPage - 1) * coursesPerPage;
+  const endIndex = startIndex + coursesPerPage;
+  const currentCourses = filtered.slice(startIndex, endIndex);
+
+  // Reset to first page when filters change
+  React.useEffect(() => {
+    setCurrentPage(1);
+  }, [search, selectedTags, price, popularOnly, batch, level]);
+
+  const handlePageChange = (page: number) => {
+    setCurrentPage(page);
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
 
   return (
     <div className="min-h-screen flex flex-col bg-background text-foreground">
@@ -121,11 +139,13 @@ const Courses = () => {
             <div className="flex-1 space-y-6">
               <div className="flex items-center justify-between">
                 <h1 className="text-2xl md:text-3xl font-semibold tracking-tight">All Courses</h1>
-                <div className="text-sm text-muted-foreground">{filtered.length} result(s)</div>
+                <div className="text-sm text-muted-foreground">
+                  {filtered.length} result(s) • Page {currentPage} of {totalPages}
+                </div>
               </div>
 
               <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            {filtered.map(course => (
+            {currentCourses.map(course => (
               <Card key={course.id} className={`relative p-6 border flex flex-col h-full ${course.popular ? 'border-primary/50 shadow-lg bg-card' : 'border-border bg-card'}`}>
                 
                 {/* Course Thumbnail */}
@@ -162,6 +182,47 @@ const Courses = () => {
               </Card>
             ))}
               </div>
+
+              {/* Pagination Controls */}
+              {totalPages > 1 && (
+                <div className="flex items-center justify-center gap-2 mt-8">
+                  <Button
+                    variant="outline"
+                    size="sm"
+                    onClick={() => handlePageChange(currentPage - 1)}
+                    disabled={currentPage === 1}
+                    className="flex items-center gap-2"
+                  >
+                    <ChevronLeft className="h-4 w-4" />
+                    Previous
+                  </Button>
+                  
+                  <div className="flex items-center gap-1">
+                    {Array.from({ length: totalPages }, (_, i) => i + 1).map((page) => (
+                      <Button
+                        key={page}
+                        variant={currentPage === page ? "default" : "outline"}
+                        size="sm"
+                        onClick={() => handlePageChange(page)}
+                        className="w-10 h-10 p-0"
+                      >
+                        {page}
+                      </Button>
+                    ))}
+                  </div>
+                  
+                  <Button
+                    variant="outline"
+                    size="sm"
+                    onClick={() => handlePageChange(currentPage + 1)}
+                    disabled={currentPage === totalPages}
+                    className="flex items-center gap-2"
+                  >
+                    Next
+                    <ChevronRight className="h-4 w-4" />
+                  </Button>
+                </div>
+              )}
             </div>
           </div>
         </div>

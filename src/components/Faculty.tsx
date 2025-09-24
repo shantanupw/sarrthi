@@ -76,16 +76,19 @@ const Faculty = () => {
             return (
               <Card key={index} className="p-6 border-border bg-card hover:shadow-lg transition-all duration-300">
                 <CardContent className="p-0 space-y-4">
-                  <div className="flex items-center gap-4">
-                    <div className="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center">
-                      <Icon className="w-6 h-6 text-primary" />
+                  {/* Faculty Image */}
+                  <div className="w-full h-32 bg-muted rounded-lg mb-4 flex items-center justify-center">
+                    <div className="text-center text-muted-foreground">
+                      <Icon className="w-8 h-8 mx-auto mb-2" />
+                      <span className="text-sm">Faculty Photo</span>
                     </div>
-                    <div>
-                      <h3 className="font-semibold text-foreground">{faculty.name}</h3>
-                      <Badge variant="secondary" className="text-xs mt-1">
-                        {faculty.experience}
-                      </Badge>
-                    </div>
+                  </div>
+                  
+                  <div className="space-y-2">
+                    <h3 className="font-semibold text-foreground text-center">{faculty.name}</h3>
+                    <Badge variant="secondary" className="text-xs w-full justify-center">
+                      {faculty.experience}
+                    </Badge>
                   </div>
 
                   <div className="space-y-2">

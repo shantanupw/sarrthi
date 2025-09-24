@@ -2,15 +2,15 @@
 import React, { useState, useEffect } from 'react';
 import { Button } from '@/components/ui/button';
 import Logo from './Logo';
-import { Menu, X, BookOpen, Users, HeartHandshake, Download, Phone, Sun, Moon } from 'lucide-react';
+import { Menu, X, BookOpen, Users, HeartHandshake, LayoutDashboard, Phone, Sun, Moon } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { ToggleGroup, ToggleGroupItem } from '@/components/ui/toggle-group';
 import { Switch } from '@/components/ui/switch';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 
 const Header = () => {
-  const [activePage, setActivePage] = useState('courses');
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [isScrolled, setIsScrolled] = useState(false);
   const [isDarkMode, setIsDarkMode] = useState(() => {
     try {
       const saved = localStorage.getItem('theme');
@@ -19,6 +19,22 @@ const Header = () => {
       return false;
     }
   }); // Default to light mode unless persisted
+  
+  const location = useLocation();
+  const navigate = useNavigate();
+  
+  // Determine active page based on current route
+  const getActivePage = () => {
+    const path = location.pathname;
+    if (path === '/dashboard') return 'dashboard';
+    if (path === '/courses') return 'courses';
+    if (path.startsWith('/course/')) return 'courses';
+    if (path === '/' && location.hash) return location.hash.substring(1);
+    if (path === '/') return 'courses'; // Default for home page
+    return 'courses';
+  };
+  
+  const activePage = getActivePage();
   
   useEffect(() => {
     // Apply and persist the theme when it changes
@@ -32,22 +48,37 @@ const Header = () => {
       try { localStorage.setItem('theme', 'light'); } catch {}
     }
   }, [isDarkMode]);
-  
-  const location = useLocation();
-  const navigate = useNavigate();
+
+  // Handle scroll detection for blur effect
+  useEffect(() => {
+    const handleScroll = () => {
+      const scrollTop = window.scrollY;
+      setIsScrolled(scrollTop > 20);
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
 
   const handleNavClick = (page: string) => (e: React.MouseEvent) => {
     e.preventDefault();
-    setActivePage(page);
-    if (location.pathname === '/') {
-      const element = document.getElementById(page);
-      if (element) {
-        element.scrollIntoView({ behavior: 'smooth' });
-      } else {
-        window.location.hash = `#${page}`;
-      }
+    
+    if (page === 'dashboard') {
+      navigate('/dashboard');
+    } else if (page === 'courses') {
+      navigate('/courses');
     } else {
-      navigate(`/#${page}`);
+      // For other pages, navigate to home with hash
+      if (location.pathname === '/') {
+        const element = document.getElementById(page);
+        if (element) {
+          element.scrollIntoView({ behavior: 'smooth' });
+        } else {
+          window.location.hash = `#${page}`;
+        }
+      } else {
+        navigate(`/#${page}`);
+      }
     }
     setMobileMenuOpen(false);
   };
@@ -61,7 +92,10 @@ const Header = () => {
   };
 
   return (
-    <div className="sticky top-0 z-50 pt-8 px-4">
+    <div className={cn(
+      "sticky top-0 z-50 pt-8 px-4 transition-all duration-300",
+      isScrolled && "backdrop-blur-md bg-background/80 shadow-lg"
+    )}>
       <header className="w-full max-w-7xl mx-auto py-3 px-6 md:px-8 flex items-center justify-between">
         <div className="p-3">
           <Link to="/" aria-label="Sarrthi IAS Home" className="inline-flex">
@@ -79,8 +113,18 @@ const Header = () => {
         
         {/* Desktop navigation */}
         <nav className="hidden md:flex items-center absolute left-1/2 transform -translate-x-1/2">
-          <div className="rounded-full px-1 py-1 backdrop-blur-md bg-background/80 border border-border shadow-lg">
-            <ToggleGroup type="single" value={activePage} onValueChange={(value) => value && setActivePage(value)}>
+          <div className={cn(
+            "rounded-full px-1 py-1 border border-border transition-all duration-300",
+            isScrolled 
+              ? "backdrop-blur-lg bg-background/90 shadow-xl" 
+              : "backdrop-blur-md bg-background/80 shadow-lg"
+          )}>
+            <ToggleGroup type="single" value={activePage} onValueChange={(value) => {
+              if (value) {
+                const event = new MouseEvent('click', { bubbles: true });
+                handleNavClick(value)(event as any);
+              }
+            }}>
               <ToggleGroupItem 
                 value="courses" 
                 className={cn(
@@ -113,14 +157,14 @@ const Header = () => {
                 <Users size={16} className="inline-block mr-1.5" /> Faculty
               </ToggleGroupItem>
               <ToggleGroupItem 
-                value="app" 
+                value="dashboard" 
                 className={cn(
                   "px-4 py-2 rounded-full transition-colors relative",
-                  activePage === 'app' ? 'text-accent-foreground bg-accent' : 'text-muted-foreground hover:text-foreground hover:bg-muted'
+                  activePage === 'dashboard' ? 'text-accent-foreground bg-accent' : 'text-muted-foreground hover:text-foreground hover:bg-muted'
                 )}
-                onClick={handleNavClick('app')}
+                onClick={() => navigate('/dashboard')}
               >
-                <Download size={16} className="inline-block mr-1.5" /> Download App
+                <LayoutDashboard size={16} className="inline-block mr-1.5" /> Dashboard
               </ToggleGroupItem>
               <ToggleGroupItem 
                 value="contact" 
@@ -139,7 +183,7 @@ const Header = () => {
         
         {/* Mobile navigation */}
         {mobileMenuOpen && (
-          <div className="md:hidden absolute top-20 left-4 right-4 bg-background/95 backdrop-blur-md py-4 px-6 border border-border rounded-2xl shadow-lg z-50">
+          <div className="md:hidden absolute top-20 left-4 right-4 bg-background/95 backdrop-blur-lg py-4 px-6 border border-border rounded-2xl shadow-xl z-50">
             <div className="flex flex-col gap-4">
               <a 
                 href="#mentorship" 
@@ -169,13 +213,13 @@ const Header = () => {
                 <Users size={16} className="inline-block mr-1.5" /> Faculty
               </a>
               <a 
-                href="#app" 
+                href="/dashboard" 
                 className={`px-3 py-2 text-sm rounded-md transition-colors ${
-                  activePage === 'app' ? 'bg-accent text-accent-foreground' : 'text-muted-foreground hover:text-foreground hover:bg-muted'
+                  activePage === 'dashboard' ? 'bg-accent text-accent-foreground' : 'text-muted-foreground hover:text-foreground hover:bg-muted'
                 }`}
-                onClick={handleNavClick('app')}
+                onClick={() => navigate('/dashboard')}
               >
-                <Download size={16} className="inline-block mr-1.5" /> Download App
+                <LayoutDashboard size={16} className="inline-block mr-1.5" /> Dashboard
               </a>
               <a 
                 href="#contact" 

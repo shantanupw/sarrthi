@@ -9,6 +9,7 @@ import { useParams, useNavigate } from 'react-router-dom';
 import { courses } from '@/lib/courses';
 import CourseTestimonials from '@/components/CourseTestimonials';
 import CourseInfoCard from '@/components/CourseInfoCard';
+import { Award, BookOpen, Users, Star } from 'lucide-react';
 
 const CourseDetails: React.FC = () => {
   const [phone, setPhone] = useState<string>('');
@@ -21,13 +22,13 @@ const CourseDetails: React.FC = () => {
   }, [slug]);
 
   const faculties = [
-    { name: 'Dr. Shivin Chaudhary', subtitle: 'Ex-IRS', details: 'Economy, Environment, Disaster Management, Science & Technology, Security' },
-    { name: 'Varun Jain', subtitle: '2 UPSC Interviews, Founder Sarrthi IAS', details: 'IR, MCQ Solving & Mentorship' },
-    { name: 'Mudit Jain', subtitle: 'Ex-IRS, Ex-IPS', details: 'Ethics, Essay and Current Affairs' },
-    { name: 'M. Puri Sir', subtitle: '3 UPSC Interviews, 25+ Years', details: 'General Studies 2' },
-    { name: 'Pallavi Saxena', subtitle: '3 UPSC Interviews, UGC NET (100 percentile)', details: 'Geography & Mapping' },
-    { name: 'Kawal Baweja', subtitle: '5+ Years', details: 'Ancient, Medieval, Art & Culture, Modern History' },
-    { name: 'Sajal Singh', subtitle: 'Mentor to 450+ rankers, 3 UPSC Interviews', details: 'Strategy and Mentorship' },
+    { name: 'Dr. Shivin Chaudhary', subtitle: 'Ex-IRS', details: 'Economy, Environment, Disaster Management, Science & Technology, Security', icon: BookOpen },
+    { name: 'Varun Jain', subtitle: '2 UPSC Interviews, Founder Sarrthi IAS', details: 'IR, MCQ Solving & Mentorship', icon: Award },
+    { name: 'Mudit Jain', subtitle: 'Ex-IRS, Ex-IPS', details: 'Ethics, Essay and Current Affairs', icon: Award },
+    { name: 'M. Puri Sir', subtitle: '3 UPSC Interviews, 25+ Years', details: 'General Studies 2', icon: Users },
+    { name: 'Pallavi Saxena', subtitle: '3 UPSC Interviews, UGC NET (100 percentile)', details: 'Geography & Mapping', icon: BookOpen },
+    { name: 'Kawal Baweja', subtitle: '5+ Years', details: 'Ancient, Medieval, Art & Culture, Modern History', icon: BookOpen },
+    { name: 'Sajal Singh', subtitle: 'Mentor to 450+ rankers, 3 UPSC Interviews', details: 'Strategy and Mentorship', icon: Star },
   ];
 
   const handleCallBack = () => {
@@ -72,15 +73,28 @@ const CourseDetails: React.FC = () => {
               <section className="space-y-4">
                 <h2 className="text-2xl font-medium">Meet Your Educators</h2>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                  {faculties.map((faculty, index) => (
-                    <Card key={index} className="border-border bg-card">
-                      <CardContent className="p-4">
-                        <div className="font-semibold">{faculty.name}</div>
-                        <div className="text-sm text-primary">{faculty.subtitle}</div>
-                        <div className="text-sm text-muted-foreground">{faculty.details}</div>
-                      </CardContent>
-                    </Card>
-                  ))}
+                  {faculties.map((faculty, index) => {
+                    const Icon = faculty.icon;
+                    return (
+                      <Card key={index} className="border-border bg-card">
+                        <CardContent className="p-4 space-y-4">
+                          {/* Faculty Image */}
+                          <div className="w-full h-24 bg-muted rounded-lg flex items-center justify-center">
+                            <div className="text-center text-muted-foreground">
+                              <Icon className="w-6 h-6 mx-auto mb-1" />
+                              <span className="text-xs">Faculty Photo</span>
+                            </div>
+                          </div>
+                          
+                          <div className="space-y-2">
+                            <div className="font-semibold text-center">{faculty.name}</div>
+                            <div className="text-sm text-primary text-center">{faculty.subtitle}</div>
+                            <div className="text-sm text-muted-foreground text-center">{faculty.details}</div>
+                          </div>
+                        </CardContent>
+                      </Card>
+                    );
+                  })}
                 </div>
               </section>
 
