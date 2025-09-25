@@ -113,7 +113,7 @@ const Courses = () => {
                 </div>
                 <div className="space-y-2">
                   <div className="text-sm text-muted-foreground">Batch</div>
-                  {(['All', 'Batch 5', 'Batch 4', 'Batch 3'] as const).map(b => (
+                  {(['All', 'Batch 5', 'Batch 4', 'Batch 3', 'Foundation', 'Test Series', 'Mains', 'Free'] as const).map(b => (
                     <label key={b} className="flex items-center gap-2 text-sm">
                       <input type="radio" name="batch" checked={batch===b} onChange={() => setBatch(b)} /> {b}
                     </label>
