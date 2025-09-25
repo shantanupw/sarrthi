@@ -148,6 +148,13 @@ const Courses = () => {
             {currentCourses.map(course => (
               <Card key={course.id} className={`relative p-6 border flex flex-col h-full ${course.popular ? 'border-primary/50 shadow-lg bg-card' : 'border-border bg-card'}`}>
                 
+                {/* Popular Badge */}
+                {course.popular && (
+                  <div className="absolute -top-3 -right-3 bg-primary text-primary-foreground px-3 py-1 rounded-full text-xs font-semibold z-10">
+                    Most Popular
+                  </div>
+                )}
+                
                 {/* Course Thumbnail */}
                 <div className="w-full h-32 bg-muted rounded-lg mb-4 flex items-center justify-center">
                   <div className="text-center text-muted-foreground">
@@ -159,7 +166,12 @@ const Courses = () => {
                 <CardHeader className="p-0 pb-4">
                   <div className="space-y-2">
                     <div className="flex items-center justify-between">
-                      <Badge variant="outline" className="text-xs border-strong">{course.batch}</Badge>
+                      <div className="flex items-center gap-2">
+                        <Badge variant="outline" className="text-xs border-strong">{course.batch}</Badge>
+                        {course.live && (
+                          <Badge variant="destructive" className="text-xs bg-red-500 text-white">LIVE</Badge>
+                        )}
+                      </div>
                       <div className="flex items-center gap-1 text-xs text-muted-foreground"><Calendar className="w-3 h-3" />{course.startDate}</div>
                     </div>
                     <h3 className="text-xl font-semibold tracking-tight">{course.title}</h3>

@@ -7,40 +7,43 @@ export type Course = {
   price: string;
   features: string[];
   popular?: boolean;
+  live?: boolean;
   tags: string[]; // categories
 };
 
 export const courses: Course[] = [
   {
     id: 1,
-    title: 'Live GS Foundation Course 2026 - Batch 3',
+    title: 'GS Foundation Course 2026 - Batch 3',
     slug: 'live-gs-foundation-course-2026-batch-3',
     batch: 'Batch 3',
     startDate: '1st April 2025',
     price: '₹19,456',
     features: [
-      'Comprehensive Live Foundation Course',
-      'Live Interactive Classes',
+      'Comprehensive Foundation Course',
+      'Interactive Classes',
       'Complete GS Coverage',
       'Expert Faculty Guidance'
     ],
+    live: true,
     tags: ['GS Foundation']
   },
   {
     id: 2,
-    title: 'Live GS Foundation Course 2026 - Batch 3 Plus',
+    title: 'GS Foundation Course 2026 - Batch 3 Plus',
     slug: 'live-gs-foundation-course-2026-batch-3-plus',
     batch: 'Batch 3 Plus',
     startDate: '1st April 2025',
     price: '₹29,198',
     features: [
-      'Comprehensive Live Foundation Course',
+      'Comprehensive Foundation Course',
       '1:1 Mentorship',
-      'Live Interactive Classes',
+      'Interactive Classes',
       'Complete GS Coverage',
       'Premium Support'
     ],
     popular: true,
+    live: true,
     tags: ['GS Foundation']
   },
   {
@@ -75,7 +78,7 @@ export const courses: Course[] = [
   },
   {
     id: 5,
-    title: 'Live PSIR Quality Enrichment Program for UPSC 2026',
+    title: 'PSIR Quality Enrichment Program for UPSC 2026',
     slug: 'live-psir-quality-enrichment-program-upsc-2026',
     batch: 'PSIR 2026',
     startDate: '10th March 2025',
@@ -83,14 +86,15 @@ export const courses: Course[] = [
     features: [
       'All in One Complete Course for PSIR Mains',
       '1 Free Content Inside',
-      'Live Interactive Sessions',
+      'Interactive Sessions',
       'Quality Content'
     ],
+    live: true,
     tags: ['PSIR']
   },
   {
     id: 6,
-    title: 'Live PSIR Quality Enrichment Program Plus for UPSC 2026',
+    title: 'PSIR Quality Enrichment Program Plus for UPSC 2026',
     slug: 'live-psir-quality-enrichment-program-plus-upsc-2026',
     batch: 'PSIR Plus 2026',
     startDate: '10th March 2025',
@@ -101,11 +105,12 @@ export const courses: Course[] = [
       'Premium PSIR Coverage',
       'Additional Support'
     ],
+    live: true,
     tags: ['PSIR']
   },
   {
     id: 7,
-    title: 'Live Economy Foundation Course by Dr Shivin',
+    title: 'Economy Foundation Course by Dr Shivin',
     slug: 'live-economy-foundation-course-dr-shivin',
     batch: 'Economy Foundation',
     startDate: '20th February 2025',
@@ -114,13 +119,14 @@ export const courses: Course[] = [
       'Prepare Economy for UPSC 2025 with Dr. Shivin',
       'Expert Faculty Guidance',
       'Comprehensive Coverage',
-      'Live Interactive Classes'
+      'Interactive Classes'
     ],
+    live: true,
     tags: ['Economy', 'Foundation']
   },
   {
     id: 8,
-    title: 'Live CSAT Foundation Course for UPSC 2026',
+    title: 'CSAT Foundation Course for UPSC 2026',
     slug: 'live-csat-foundation-course-upsc-2026',
     batch: 'CSAT Foundation',
     startDate: '1st March 2025',
@@ -131,11 +137,12 @@ export const courses: Course[] = [
       'Comprehensive CSAT Coverage',
       'Problem Solving Techniques'
     ],
+    live: true,
     tags: ['CSAT', 'Foundation']
   },
   {
     id: 9,
-    title: 'Live PSIR Foundation Course for UPSC CSE 2026',
+    title: 'PSIR Foundation Course for UPSC CSE 2026',
     slug: 'live-psir-foundation-course-upsc-cse-2026',
     batch: 'PSIR Foundation',
     startDate: '15th February 2025',
@@ -146,26 +153,28 @@ export const courses: Course[] = [
       'Complete PSIR Foundation',
       'Expert Faculty'
     ],
+    live: true,
     tags: ['PSIR', 'Foundation']
   },
   {
     id: 10,
-    title: 'Live GS Foundation Course 2026 - Batch 5',
+    title: 'GS Foundation Course 2026 - Batch 5',
     slug: 'live-gs-foundation-course-2026-batch-5',
     batch: 'Batch 5',
     startDate: '14th July 2025',
     price: '₹19,465',
     features: [
-      'Comprehensive Live Foundation Course',
-      'Live Interactive Classes',
+      'Comprehensive Foundation Course',
+      'Interactive Classes',
       'Complete GS Coverage',
       'Expert Faculty Guidance'
     ],
+    live: true,
     tags: ['GS Foundation']
   },
   {
     id: 11,
-    title: 'Live Bundle Course - GS 3 Mains Module + Test Series',
+    title: 'Bundle Course - GS 3 Mains Module + Test Series',
     slug: 'live-bundle-course-gs3-mains-module-test-series',
     batch: 'GS3 Bundle',
     startDate: '5th April 2025',
@@ -176,6 +185,7 @@ export const courses: Course[] = [
       'Test Series Included',
       'Comprehensive Practice'
     ],
+    live: true,
     tags: ['GS 3', 'Mains', 'Bundle']
   },
   {
@@ -195,7 +205,7 @@ export const courses: Course[] = [
   },
   {
     id: 13,
-    title: 'LIVE FREE PSIR Active Recall & PYQ Sessions',
+    title: 'FREE PSIR Active Recall & PYQ Sessions',
     slug: 'live-free-psir-active-recall-pyq-sessions',
     batch: 'Free PSIR',
     startDate: '1st December 2024',
@@ -206,26 +216,28 @@ export const courses: Course[] = [
       'PYQ Practice',
       'Interactive Learning'
     ],
+    live: true,
     tags: ['PSIR', 'Free']
   },
   {
     id: 14,
-    title: 'Live Write Smart - Answer Writing through Live Classes',
+    title: 'Write Smart - Answer Writing through Classes',
     slug: 'live-write-smart-answer-writing-live-classes',
     batch: 'Write Smart',
     startDate: '10th January 2025',
     price: '₹3,245',
     features: [
-      'Learn Answer Writing through Live Classes',
+      'Learn Answer Writing through Classes',
       '3 Free Content Inside',
       'Expert Guidance',
       'Practice Sessions'
     ],
+    live: true,
     tags: ['Answer Writing', 'Mains']
   },
   {
     id: 15,
-    title: 'Mains Test Series with Live Write Smart Bundle',
+    title: 'Mains Test Series with Write Smart Bundle',
     slug: 'mains-test-series-live-write-smart-bundle',
     batch: 'Mains Bundle',
     startDate: '15th February 2025',
@@ -240,7 +252,7 @@ export const courses: Course[] = [
   },
   {
     id: 16,
-    title: 'Live GS 2 Mains Module for UPSC CSE 2026',
+    title: 'GS 2 Mains Module for UPSC CSE 2026',
     slug: 'live-gs2-mains-module-upsc-cse-2026',
     batch: 'GS2 Mains',
     startDate: '20th March 2025',
@@ -248,24 +260,26 @@ export const courses: Course[] = [
     features: [
       'Coverage of all GS 2 subjects such as Polity',
       'Complete GS2 Coverage',
-      'Live Interactive Classes',
+      'Interactive Classes',
       'Expert Faculty'
     ],
+    live: true,
     tags: ['GS 2', 'Mains']
   },
   {
     id: 17,
-    title: 'Live GS Foundation Course 2026 - Batch 4',
+    title: 'GS Foundation Course 2026 - Batch 4',
     slug: 'live-gs-foundation-course-2026-batch-4',
     batch: 'Batch 4',
     startDate: '26th May 2025',
     price: '₹19,465',
     features: [
-      'Comprehensive Live Foundation Course',
-      'Live Interactive Classes',
+      'Comprehensive Foundation Course',
+      'Interactive Classes',
       'Complete GS Coverage',
       'Expert Faculty Guidance'
     ],
+    live: true,
     tags: ['GS Foundation']
   },
   {
@@ -300,17 +314,18 @@ export const courses: Course[] = [
   },
   {
     id: 20,
-    title: 'Live GS Foundation Course 2026 - Batch 4 Plus',
+    title: 'GS Foundation Course 2026 - Batch 4 Plus',
     slug: 'live-gs-foundation-course-2026-batch-4-plus',
     batch: 'Batch 4 Plus',
     startDate: '26th May 2025',
     price: '₹29,198',
     features: [
-      'Comprehensive Live Foundation Course',
+      'Comprehensive Foundation Course',
       '1:1 Mentorship',
-      'Live Interactive Classes',
+      'Interactive Classes',
       'Premium Support'
     ],
+    live: true,
     tags: ['GS Foundation']
   },
   {
@@ -330,7 +345,7 @@ export const courses: Course[] = [
   },
   {
     id: 22,
-    title: 'Live Essay Mains Module with Essay Mains Test Series',
+    title: 'Essay Mains Module with Essay Mains Test Series',
     slug: 'live-essay-mains-module-test-series',
     batch: 'Essay Mains',
     startDate: '1st February 2025',
@@ -341,6 +356,7 @@ export const courses: Course[] = [
       'Complete Essay Coverage',
       'Test Series Included'
     ],
+    live: true,
     tags: ['Essay', 'Mains']
   },
   {
@@ -360,37 +376,39 @@ export const courses: Course[] = [
   },
   {
     id: 24,
-    title: 'Live Ethics Mains Module with Ethics Mains Test Series',
+    title: 'Ethics Mains Module with Ethics Mains Test Series',
     slug: 'live-ethics-mains-module-test-series',
     batch: 'Ethics Complete',
     startDate: '1st March 2025',
     price: '₹7,669',
     features: [
       'Complete coverage of Ethics by Mudit Jain',
-      'Live Classes + Test Series',
+      'Classes + Test Series',
       'Comprehensive Ethics Coverage',
       'Expert Faculty'
     ],
+    live: true,
     tags: ['Ethics', 'Mains']
   },
   {
     id: 25,
-    title: 'Live Ethics Mains Module for UPSC CSE 2026',
+    title: 'Ethics Mains Module for UPSC CSE 2026',
     slug: 'live-ethics-mains-module-upsc-cse-2026',
     batch: 'Ethics Mains',
     startDate: '1st March 2025',
     price: '₹3,245',
     features: [
       'Complete coverage of the Ethics syllabus',
-      'Live Interactive Classes',
+      'Interactive Classes',
       'Expert Faculty Guidance',
       'Comprehensive Coverage'
     ],
+    live: true,
     tags: ['Ethics', 'Mains']
   },
   {
     id: 26,
-    title: 'Live GS 3 Mains Module for UPSC CSE 2026',
+    title: 'GS 3 Mains Module for UPSC CSE 2026',
     slug: 'live-gs3-mains-module-upsc-cse-2026',
     batch: 'GS3 Mains',
     startDate: '15th April 2025',
@@ -398,9 +416,10 @@ export const courses: Course[] = [
     features: [
       'Comprehensive coverage of all GS 3 topics',
       '2 Free Content Inside',
-      'Live Interactive Classes',
+      'Interactive Classes',
       'Expert Faculty'
     ],
+    live: true,
     tags: ['GS 3', 'Mains']
   },
   {
@@ -416,6 +435,7 @@ export const courses: Course[] = [
       'Expert Analysis',
       'Regular Updates'
     ],
+    live: true,
     tags: ['Current Affairs']
   },
   {

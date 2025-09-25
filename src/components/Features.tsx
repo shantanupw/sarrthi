@@ -16,79 +16,83 @@ import {
 import ContactDialog from '@/components/ContactDialog';
 import { useNavigate } from 'react-router-dom';
 
-import { courses as allCourses } from '@/lib/courses';
+import { courses as allCourses, Course } from '@/lib/courses';
 
 const Features = () => {
   const navigate = useNavigate();
   const [activeCategory, setActiveCategory] = useState<string>('All Courses');
-  const courses = allCourses;
+  const courses: Course[] = [...allCourses];
   // Additional courses from content spec
   courses.push(
     {
       id: 9,
-      title: "Live GS Foundation Course 2026 (Batch 4)",
+      title: "GS Foundation Course 2026 (Batch 4)",
       slug: "live-gs-foundation-course-2026-batch-4-additional",
       batch: "Batch 4",
       startDate: "26th May 2025",
       price: "₹19,999",
       features: [
-        "Live Foundation Class",
+        "Foundation Class",
         "Flip Learning Method",
-        "Live Answer Writing Session",
+        "Answer Writing Session",
         "Mains & Interview Preparation",
         "PYQ-Based Practice"
       ],
       popular: false,
+      live: true,
       tags: ["GS Foundation"]
     },
     {
       id: 10,
-      title: "Live GS Foundation Course 2026 Plus (Batch 4)",
+      title: "GS Foundation Course 2026 Plus (Batch 4)",
       slug: "live-gs-foundation-course-2026-plus-batch-4-additional",
       batch: "Batch 4 Plus",
       startDate: "26th May 2025",
       price: "₹29,999",
       features: [
-        "Live Foundation Class",
+        "Foundation Class",
         "1:1 Mentorship",
         "Bi-Weekly Study Plans",
-        "Live Answer Writing Sessions",
+        "Answer Writing Sessions",
         "Prelims & Mains Revision"
       ],
       popular: false,
+      live: true,
       tags: ["GS Foundation"]
     },
     {
       id: 11,
-      title: "Live GS Foundation Course 2026 Plus (Batch 3)",
+      title: "GS Foundation Course 2026 Plus (Batch 3)",
       slug: "live-gs-foundation-course-2026-plus-batch-3-additional",
       batch: "Batch 3 Plus",
       startDate: "1st April 2025",
       price: "₹29,999",
       features: [
-        "Live Foundation Class",
+        "Foundation Class",
         "1:1 Mentorship",
         "Bi-Weekly Study Plans",
-        "Live Answer Writing Sessions",
+        "Answer Writing Sessions",
         "Prelims & Mains Revision"
       ],
       popular: false,
+      live: true,
       tags: ["GS Foundation"]
     },
     {
       id: 12,
-      title: "Live GS Foundation Course 2026 (Batch 3)",
+      title: "GS Foundation Course 2026 (Batch 3)",
       slug: "live-gs-foundation-course-2026-batch-3-additional",
       batch: "Batch 3",
       startDate: "1st April 2025",
       price: "₹19,999",
       features: [
-        "Live Foundation Class",
+        "Foundation Class",
         "Complete Mains Coverage",
-        "Live Answer Writing Session",
+        "Answer Writing Session",
         "Prelims Revision"
       ],
       popular: false,
+      live: true,
       tags: ["GS Foundation"]
     }
   );
@@ -167,7 +171,7 @@ const Features = () => {
                   } transition-all duration-300`}
                 >
                   {course.popular && (
-                    <div className="absolute -top-4 left-1/2 -translate-x-1/2 px-4 py-1 bg-primary text-primary-foreground text-sm rounded-full font-medium">
+                    <div className="absolute -top-3 left-1/2 -translate-x-1/2 bg-primary text-primary-foreground px-3 py-1 rounded-full text-xs font-semibold z-10">
                       Most Popular
                     </div>
                   )}
@@ -183,9 +187,14 @@ const Features = () => {
                   <CardHeader className="p-0 pb-4">
                     <div className="space-y-2">
                       <div className="flex items-center justify-between">
-                        <Badge variant="outline" className="text-xs border-strong">
-                          {course.batch}
-                        </Badge>
+                        <div className="flex items-center gap-2">
+                          <Badge variant="outline" className="text-xs border-strong">
+                            {course.batch}
+                          </Badge>
+                          {course.live && (
+                            <Badge variant="destructive" className="text-xs bg-red-500 text-white">LIVE</Badge>
+                          )}
+                        </div>
                         <div className="flex items-center gap-1 text-xs text-muted-foreground">
                           <Calendar className="w-3 h-3" />
                           {course.startDate}
