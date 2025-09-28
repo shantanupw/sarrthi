@@ -4,9 +4,6 @@ import { Badge } from '@/components/ui/badge';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import DisciplineEngineSection from '@/components/dashboard/DisciplineEngine';
 import StudyMaterialsSection from '@/components/dashboard/StudyMaterials';
-import QuickActions from '@/components/dashboard/QuickActions';
-import PerformanceMetrics from '@/components/dashboard/PerformanceMetrics';
-import StudyPlan from '@/components/dashboard/StudyPlan';
 import Logo from '@/components/Logo';
 import { 
   Brain, 
@@ -34,13 +31,7 @@ import {
   Sun,
   Moon,
   Phone,
-  HeartHandshake,
-  GraduationCap,
-  Library,
-  PenTool,
-  Lightbulb,
-  Settings,
-  HelpCircle
+  HeartHandshake
 } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { Switch } from '@/components/ui/switch';
@@ -139,14 +130,11 @@ const DashboardSidebar = ({ activeSection, setActiveSection, isOpen, setIsOpen, 
 }) => {
   const sidebarItems = [
     { id: 'overview', label: 'Overview', icon: Target },
-    { id: 'study-plan', label: 'Study Plan', icon: Calendar },
     { id: 'ai-mentor', label: 'AI Mentor', icon: Brain },
     { id: 'evaluation', label: 'Answer Evaluation', icon: Upload },
-    { id: 'quick-actions', label: 'Quick Actions', icon: Zap },
-    { id: 'performance', label: 'Performance', icon: BarChart3 },
     { id: 'discipline', label: 'Discipline Engine', icon: TrendingUp },
     { id: 'materials', label: 'Study Materials', icon: BookOpen },
-    { id: 'practice', label: 'Practice Center', icon: FileText },
+    { id: 'practice', label: 'Practice Center', icon: BarChart3 },
     { id: 'current-affairs', label: 'Current Affairs', icon: Globe },
     { id: 'community', label: 'Community', icon: Users },
     { id: 'platform', label: 'Platform', icon: Smartphone },
@@ -198,77 +186,21 @@ const DashboardSidebar = ({ activeSection, setActiveSection, isOpen, setIsOpen, 
           </nav>
 
           {/* Quick Stats */}
-          <div className="mt-8 p-4 bg-gradient-to-br from-primary/10 to-primary/5 rounded-lg border border-primary/20">
-            <h3 className="font-medium text-sm mb-3 flex items-center gap-2">
-              <Trophy className="h-4 w-4 text-primary" />
-              Quick Stats
-            </h3>
-            <div className="space-y-3 text-sm">
-              <div className="flex justify-between items-center">
-                <span className="text-muted-foreground flex items-center gap-2">
-                  <Flame className="h-3 w-3 text-orange-500" />
-                  Study Streak
-                </span>
-                <Badge variant="secondary" className="font-medium">47 days</Badge>
+          <div className="mt-8 p-4 bg-muted/50 rounded-lg">
+            <h3 className="font-medium text-sm mb-3">Quick Stats</h3>
+            <div className="space-y-2 text-sm">
+              <div className="flex justify-between">
+                <span className="text-muted-foreground">Study Streak</span>
+                <span className="font-medium">47 days</span>
               </div>
-              <div className="flex justify-between items-center">
-                <span className="text-muted-foreground flex items-center gap-2">
-                  <Target className="h-3 w-3 text-green-500" />
-                  Today's Progress
-                </span>
-                <Badge className="font-medium">75%</Badge>
+              <div className="flex justify-between">
+                <span className="text-muted-foreground">Today's Progress</span>
+                <span className="font-medium">75%</span>
               </div>
-              <div className="flex justify-between items-center">
-                <span className="text-muted-foreground flex items-center gap-2">
-                  <Award className="h-3 w-3 text-blue-500" />
-                  Community Rank
-                </span>
-                <Badge variant="outline" className="font-medium">#47</Badge>
+              <div className="flex justify-between">
+                <span className="text-muted-foreground">Rank</span>
+                <span className="font-medium">#47</span>
               </div>
-              <div className="flex justify-between items-center">
-                <span className="text-muted-foreground flex items-center gap-2">
-                  <Clock className="h-3 w-3 text-purple-500" />
-                  Study Hours
-                </span>
-                <Badge variant="secondary" className="font-medium">156h</Badge>
-              </div>
-            </div>
-          </div>
-
-          {/* Quick Links */}
-          <div className="mt-6 p-4 bg-muted/30 rounded-lg">
-            <h3 className="font-medium text-sm mb-3 flex items-center gap-2">
-              <Lightbulb className="h-4 w-4 text-yellow-500" />
-              Quick Links
-            </h3>
-            <div className="space-y-2">
-              <Button 
-                variant="ghost" 
-                size="sm" 
-                className="w-full justify-start text-xs"
-                onClick={() => setActiveSection('practice')}
-              >
-                <FileText className="h-3 w-3 mr-2" />
-                Today's Mock Test
-              </Button>
-              <Button 
-                variant="ghost" 
-                size="sm" 
-                className="w-full justify-start text-xs"
-                onClick={() => setActiveSection('current-affairs')}
-              >
-                <Globe className="h-3 w-3 mr-2" />
-                Daily Current Affairs
-              </Button>
-              <Button 
-                variant="ghost" 
-                size="sm" 
-                className="w-full justify-start text-xs"
-                onClick={() => setActiveSection('ai-mentor')}
-              >
-                <Brain className="h-3 w-3 mr-2" />
-                Ask AI Mentor
-              </Button>
             </div>
           </div>
         </div>
@@ -1031,16 +963,10 @@ const Dashboard = () => {
     switch (activeSection) {
       case 'overview':
         return <OverviewSection />;
-      case 'study-plan':
-        return <StudyPlan />;
       case 'ai-mentor':
         return <AIMentorSection />;
       case 'evaluation':
         return <EvaluationSection />;
-      case 'quick-actions':
-        return <QuickActions />;
-      case 'performance':
-        return <PerformanceMetrics />;
       case 'discipline':
         return <DisciplineEngineSection />;
       case 'materials':

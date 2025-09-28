@@ -49,11 +49,11 @@ const Header = () => {
     }
   }, [isDarkMode]);
 
-  // Handle scroll detection for blur effect - appears later now
+  // Handle scroll detection for blur effect
   useEffect(() => {
     const handleScroll = () => {
       const scrollTop = window.scrollY;
-      setIsScrolled(scrollTop > 150); // Changed from 20 to 150px
+      setIsScrolled(scrollTop > 20);
     };
 
     window.addEventListener('scroll', handleScroll);
