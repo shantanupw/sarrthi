@@ -53,7 +53,7 @@ const Header = () => {
   useEffect(() => {
     const handleScroll = () => {
       const scrollTop = window.scrollY;
-      setIsScrolled(scrollTop > 20);
+      setIsScrolled(scrollTop > 150); // Only show floating header after more scroll
     };
 
     window.addEventListener('scroll', handleScroll);
