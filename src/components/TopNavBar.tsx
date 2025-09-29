@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Button } from '@/components/ui/button';
 import Logo from './Logo';
-import { Menu, X, Home, BookOpen, Users, HeartHandshake, Phone, Book, Sun, Moon } from 'lucide-react';
+import { Menu, X, Home, BookOpen, Users, HeartHandshake, Phone, Book, Sun, Moon, LayoutDashboard, Info } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { Switch } from '@/components/ui/switch';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
@@ -25,8 +25,15 @@ const TopNavBar = () => {
   // Determine active page based on current route
   const getActivePage = () => {
     const path = location.pathname;
+    const searchParams = new URLSearchParams(location.search);
+    
+    if (path === '/about') return 'about';
     if (path === '/dashboard') return 'dashboard';
-    if (path === '/courses') return 'courses';
+    if (path === '/courses') {
+      // If on books page (courses with category=books), show books as active
+      if (searchParams.get('category') === 'books') return 'books';
+      return 'courses';
+    }
     if (path.startsWith('/course/')) return 'courses';
     if (path === '/' && location.hash) return location.hash.substring(1);
     if (path === '/') return 'home';
@@ -72,13 +79,17 @@ const TopNavBar = () => {
     
     if (page === 'home') {
       navigate('/');
+    } else if (page === 'about') {
+      navigate('/about');
     } else if (page === 'courses') {
       navigate('/courses');
+    } else if (page === 'dashboard') {
+      navigate('/dashboard');
     } else if (page === 'books') {
-      // Navigate to courses with books filter or dedicated books page
+      // Navigate to courses with books filter
       navigate('/courses?category=books');
     } else {
-      // For other pages, navigate to home with hash
+      // For sections that exist on home page, navigate to home with hash
       if (location.pathname === '/') {
         const element = document.getElementById(page);
         if (element) {
@@ -103,10 +114,9 @@ const TopNavBar = () => {
 
   const navigationItems = [
     { key: 'home', label: 'Home', icon: Home },
+    { key: 'about', label: 'About', icon: Info },
     { key: 'courses', label: 'Courses', icon: BookOpen },
-    { key: 'mentorship', label: 'Free Mentorship', icon: HeartHandshake },
-    { key: 'faculty', label: 'Faculty', icon: Users },
-    { key: 'contact', label: 'Contact Us', icon: Phone },
+    { key: 'dashboard', label: 'Dashboard', icon: LayoutDashboard },
     { key: 'books', label: 'Books', icon: Book },
   ];
 
@@ -122,13 +132,13 @@ const TopNavBar = () => {
             </div>
             
             {/* Desktop Navigation */}
-            <nav className="hidden md:flex items-center space-x-1">
+            <nav className="hidden md:flex items-center space-x-2">
               {navigationItems.map((item) => (
                 <button
                   key={item.key}
                   onClick={handleNavClick(item.key)}
                   className={cn(
-                    "flex items-center px-3 py-2 rounded-md text-sm font-medium transition-colors",
+                    "flex items-center px-4 py-2 rounded-md text-sm font-medium transition-colors",
                     activePage === item.key
                       ? "bg-accent text-accent-foreground"
                       : "text-muted-foreground hover:text-foreground hover:bg-muted"
@@ -140,21 +150,38 @@ const TopNavBar = () => {
               ))}
             </nav>
             
-            {/* Right side - Theme toggle and CTA */}
-            <div className="hidden md:flex items-center space-x-4">
+            {/* Right side - Theme toggle, CTA and Login */}
+            <div className="hidden md:flex items-center space-x-3">
               {/* Theme toggle */}
-              <div className="flex items-center gap-2">
-                <Moon size={16} className={`${isDarkMode ? 'text-primary' : 'text-muted-foreground'}`} />
-                <Switch 
-                  checked={!isDarkMode} 
-                  onCheckedChange={toggleTheme} 
-                  className="data-[state=checked]:bg-primary"
-                />
-                <Sun size={16} className={`${!isDarkMode ? 'text-primary' : 'text-muted-foreground'}`} />
+              <div className="flex items-center gap-1 p-1 bg-muted/50 rounded-full">
+                <button
+                  onClick={toggleTheme}
+                  className={`p-1.5 rounded-full transition-all duration-200 ${
+                    !isDarkMode 
+                      ? 'bg-background shadow-sm text-foreground' 
+                      : 'text-muted-foreground hover:text-foreground'
+                  }`}
+                >
+                  <Sun size={14} />
+                </button>
+                <button
+                  onClick={toggleTheme}
+                  className={`p-1.5 rounded-full transition-all duration-200 ${
+                    isDarkMode 
+                      ? 'bg-background shadow-sm text-foreground' 
+                      : 'text-muted-foreground hover:text-foreground'
+                  }`}
+                >
+                  <Moon size={14} />
+                </button>
               </div>
               
-              <Button variant="default" className="brand-gradient">
+              <Button variant="default" className="brand-gradient" size="sm">
                 Get Free Callback
+              </Button>
+              
+              <Button variant="outline" size="sm">
+                Login
               </Button>
             </div>
             
@@ -190,20 +217,36 @@ const TopNavBar = () => {
                 {/* Mobile theme toggle */}
                 <div className="flex items-center justify-between px-3 py-2 mt-4">
                   <span className="text-sm text-muted-foreground">Theme</span>
-                  <div className="flex items-center gap-2">
-                    <Moon size={16} className={`${isDarkMode ? 'text-primary' : 'text-muted-foreground'}`} />
-                    <Switch 
-                      checked={!isDarkMode} 
-                      onCheckedChange={toggleTheme} 
-                      className="data-[state=checked]:bg-primary"
-                    />
-                    <Sun size={16} className={`${!isDarkMode ? 'text-primary' : 'text-muted-foreground'}`} />
+                  <div className="flex items-center gap-1 p-1 bg-muted/50 rounded-full">
+                    <button
+                      onClick={toggleTheme}
+                      className={`p-1.5 rounded-full transition-all duration-200 ${
+                        !isDarkMode 
+                          ? 'bg-background shadow-sm text-foreground' 
+                          : 'text-muted-foreground hover:text-foreground'
+                      }`}
+                    >
+                      <Sun size={14} />
+                    </button>
+                    <button
+                      onClick={toggleTheme}
+                      className={`p-1.5 rounded-full transition-all duration-200 ${
+                        isDarkMode 
+                          ? 'bg-background shadow-sm text-foreground' 
+                          : 'text-muted-foreground hover:text-foreground'
+                      }`}
+                    >
+                      <Moon size={14} />
+                    </button>
                   </div>
                 </div>
                 
-                <div className="px-3 py-2">
+                <div className="px-3 py-2 space-y-2">
                   <Button variant="default" className="brand-gradient w-full">
                     Get Free Callback
+                  </Button>
+                  <Button variant="outline" className="w-full">
+                    Login
                   </Button>
                 </div>
               </div>

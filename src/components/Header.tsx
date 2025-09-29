@@ -2,7 +2,7 @@
 import React, { useState, useEffect } from 'react';
 import { Button } from '@/components/ui/button';
 import Logo from './Logo';
-import { Menu, X, BookOpen, Users, HeartHandshake, LayoutDashboard, Phone, Sun, Moon } from 'lucide-react';
+import { Menu, X, BookOpen, Home, Book, LayoutDashboard, Sun, Moon } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { ToggleGroup, ToggleGroupItem } from '@/components/ui/toggle-group';
 import { Switch } from '@/components/ui/switch';
@@ -26,12 +26,18 @@ const Header = () => {
   // Determine active page based on current route
   const getActivePage = () => {
     const path = location.pathname;
+    const searchParams = new URLSearchParams(location.search);
+    
     if (path === '/dashboard') return 'dashboard';
-    if (path === '/courses') return 'courses';
+    if (path === '/courses') {
+      // If on books page (courses with category=books), show books as active
+      if (searchParams.get('category') === 'books') return 'books';
+      return 'courses';
+    }
     if (path.startsWith('/course/')) return 'courses';
     if (path === '/' && location.hash) return location.hash.substring(1);
-    if (path === '/') return 'courses'; // Default for home page
-    return 'courses';
+    if (path === '/') return 'home';
+    return 'home';
   };
   
   const activePage = getActivePage();
@@ -67,8 +73,10 @@ const Header = () => {
       navigate('/dashboard');
     } else if (page === 'courses') {
       navigate('/courses');
+    } else if (page === 'books') {
+      navigate('/courses?category=books');
     } else {
-      // For other pages, navigate to home with hash
+      // For sections that exist on home page, navigate to home with hash
       if (location.pathname === '/') {
         const element = document.getElementById(page);
         if (element) {
@@ -136,27 +144,6 @@ const Header = () => {
                 <BookOpen size={16} className="inline-block mr-1.5" /> Courses
               </ToggleGroupItem>
               <ToggleGroupItem 
-                value="mentorship"
-                className={cn(
-                  "px-4 py-2 rounded-full transition-colors relative",
-                  activePage === 'mentorship' ? 'text-accent-foreground bg-accent' : 'text-muted-foreground hover:text-foreground hover:bg-muted'
-                )}
-                onClick={handleNavClick('mentorship')}
-              >
-                <HeartHandshake size={16} className="inline-block mr-1.5" /> Free Mentorship
-              </ToggleGroupItem>
-              
-              <ToggleGroupItem 
-                value="faculty" 
-                className={cn(
-                  "px-4 py-2 rounded-full transition-colors relative",
-                  activePage === 'faculty' ? 'text-accent-foreground bg-accent' : 'text-muted-foreground hover:text-foreground hover:bg-muted'
-                )}
-                onClick={handleNavClick('faculty')}
-              >
-                <Users size={16} className="inline-block mr-1.5" /> Faculty
-              </ToggleGroupItem>
-              <ToggleGroupItem 
                 value="dashboard" 
                 className={cn(
                   "px-4 py-2 rounded-full transition-colors relative",
@@ -167,14 +154,14 @@ const Header = () => {
                 <LayoutDashboard size={16} className="inline-block mr-1.5" /> Dashboard
               </ToggleGroupItem>
               <ToggleGroupItem 
-                value="contact" 
+                value="books" 
                 className={cn(
                   "px-4 py-2 rounded-full transition-colors relative",
-                  activePage === 'contact' ? 'text-accent-foreground bg-accent' : 'text-muted-foreground hover:text-foreground hover:bg-muted'
+                  activePage === 'books' ? 'text-accent-foreground bg-accent' : 'text-muted-foreground hover:text-foreground hover:bg-muted'
                 )}
-                onClick={handleNavClick('contact')}
+                onClick={handleNavClick('books')}
               >
-                <Phone size={16} className="inline-block mr-1.5" /> Contact Us
+                <Book size={16} className="inline-block mr-1.5" /> Books
               </ToggleGroupItem>
               
             </ToggleGroup>
@@ -186,31 +173,22 @@ const Header = () => {
           <div className="md:hidden absolute top-20 left-4 right-4 bg-background/95 backdrop-blur-lg py-4 px-6 border border-border rounded-2xl shadow-xl z-50">
             <div className="flex flex-col gap-4">
               <a 
-                href="#mentorship" 
+                href="/" 
                 className={`px-3 py-2 text-sm rounded-md transition-colors ${
-                  activePage === 'mentorship' ? 'bg-accent text-accent-foreground' : 'text-muted-foreground hover:text-foreground hover:bg-muted'
+                  activePage === 'home' ? 'bg-accent text-accent-foreground' : 'text-muted-foreground hover:text-foreground hover:bg-muted'
                 }`}
-                onClick={handleNavClick('mentorship')}
+                onClick={handleNavClick('home')}
               >
-                <HeartHandshake size={16} className="inline-block mr-1.5" /> Free Mentorship
+                <Home size={16} className="inline-block mr-1.5" /> Home
               </a>
               <a 
-                href="#courses" 
+                href="/courses" 
                 className={`px-3 py-2 text-sm rounded-md transition-colors ${
                   activePage === 'courses' ? 'bg-accent text-accent-foreground' : 'text-muted-foreground hover:text-foreground hover:bg-muted'
                 }`}
                 onClick={handleNavClick('courses')}
               >
                 <BookOpen size={16} className="inline-block mr-1.5" /> Courses
-              </a>
-              <a 
-                href="#faculty" 
-                className={`px-3 py-2 text-sm rounded-md transition-colors ${
-                  activePage === 'faculty' ? 'bg-accent text-accent-foreground' : 'text-muted-foreground hover:text-foreground hover:bg-muted'
-                }`}
-                onClick={handleNavClick('faculty')}
-              >
-                <Users size={16} className="inline-block mr-1.5" /> Faculty
               </a>
               <a 
                 href="/dashboard" 
@@ -222,27 +200,40 @@ const Header = () => {
                 <LayoutDashboard size={16} className="inline-block mr-1.5" /> Dashboard
               </a>
               <a 
-                href="#contact" 
+                href="/courses?category=books" 
                 className={`px-3 py-2 text-sm rounded-md transition-colors ${
-                  activePage === 'contact' ? 'bg-accent text-accent-foreground' : 'text-muted-foreground hover:text-foreground hover:bg-muted'
+                  activePage === 'books' ? 'bg-accent text-accent-foreground' : 'text-muted-foreground hover:text-foreground hover:bg-muted'
                 }`}
-                onClick={handleNavClick('contact')}
+                onClick={handleNavClick('books')}
               >
-                <Phone size={16} className="inline-block mr-1.5" /> Contact Us
+                <Book size={16} className="inline-block mr-1.5" /> Books
               </a>
               
               
               {/* Add theme toggle for mobile */}
               <div className="flex items-center justify-between px-3 py-2">
                 <span className="text-sm text-muted-foreground">Theme</span>
-                <div className="flex items-center gap-2">
-                  <Moon size={16} className={`${isDarkMode ? 'text-primary' : 'text-muted-foreground'}`} />
-                  <Switch 
-                    checked={!isDarkMode} 
-                    onCheckedChange={toggleTheme} 
-                    className="data-[state=checked]:bg-primary"
-                  />
-                  <Sun size={16} className={`${!isDarkMode ? 'text-primary' : 'text-muted-foreground'}`} />
+                <div className="flex items-center gap-1 p-1 bg-muted/50 rounded-full">
+                  <button
+                    onClick={toggleTheme}
+                    className={`p-1.5 rounded-full transition-all duration-200 ${
+                      !isDarkMode 
+                        ? 'bg-background shadow-sm text-foreground' 
+                        : 'text-muted-foreground hover:text-foreground'
+                    }`}
+                  >
+                    <Sun size={14} />
+                  </button>
+                  <button
+                    onClick={toggleTheme}
+                    className={`p-1.5 rounded-full transition-all duration-200 ${
+                      isDarkMode 
+                        ? 'bg-background shadow-sm text-foreground' 
+                        : 'text-muted-foreground hover:text-foreground'
+                    }`}
+                  >
+                    <Moon size={14} />
+                  </button>
                 </div>
               </div>
             </div>
@@ -251,18 +242,34 @@ const Header = () => {
         
         <div className="hidden md:flex items-center gap-4">
           {/* Theme toggle for desktop */}
-          <div className="flex items-center gap-2 rounded-full px-3 py-2">
-            <Moon size={18} className={`${isDarkMode ? 'text-primary' : 'text-muted-foreground'}`} />
-            <Switch 
-              checked={!isDarkMode} 
-              onCheckedChange={toggleTheme} 
-              className="data-[state=checked]:bg-primary"
-            />
-            <Sun size={18} className={`${!isDarkMode ? 'text-primary' : 'text-muted-foreground'}`} />
+          <div className="flex items-center gap-1 p-1 bg-muted/50 rounded-full">
+            <button
+              onClick={toggleTheme}
+              className={`p-1.5 rounded-full transition-all duration-200 ${
+                !isDarkMode 
+                  ? 'bg-background shadow-sm text-foreground' 
+                  : 'text-muted-foreground hover:text-foreground'
+              }`}
+            >
+              <Sun size={16} />
+            </button>
+            <button
+              onClick={toggleTheme}
+              className={`p-1.5 rounded-full transition-all duration-200 ${
+                isDarkMode 
+                  ? 'bg-background shadow-sm text-foreground' 
+                  : 'text-muted-foreground hover:text-foreground'
+              }`}
+            >
+              <Moon size={16} />
+            </button>
           </div>
-          <div className="rounded-2xl">
-            <Button variant="default" className="brand-gradient">Get Free Callback</Button>
-          </div>
+          <Button variant="default" className="brand-gradient" size="sm">
+            Get Free Callback
+          </Button>
+          <Button variant="outline" size="sm">
+            Login
+          </Button>
         </div>
       </header>
     </div>
