@@ -1,5 +1,5 @@
 import React, { useMemo, useState } from 'react';
-import Header from '@/components/Header';
+import TopNavBar from '@/components/TopNavBar';
 import Footer from '@/components/Footer';
 import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
@@ -42,8 +42,8 @@ const CourseDetails: React.FC = () => {
 
   return (
     <div className="min-h-screen flex flex-col bg-background text-foreground">
-      <Header />
-      <main className="py-12 px-6 md:px-12">
+      <TopNavBar />
+      <main className="pt-20 py-12 px-6 md:px-12">
         <div className="max-w-7xl mx-auto space-y-8">
           <button 
             onClick={() => window.history.length > 1 ? window.history.back() : navigate('/')} 

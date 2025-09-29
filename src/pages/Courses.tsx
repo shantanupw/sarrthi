@@ -1,5 +1,5 @@
 import React, { useMemo, useState } from 'react';
-import Header from '@/components/Header';
+import TopNavBar from '@/components/TopNavBar';
 import Footer from '@/components/Footer';
 import { courses } from '@/lib/courses';
 import { Card, CardContent, CardHeader } from '@/components/ui/card';
@@ -67,8 +67,8 @@ const Courses = () => {
 
   return (
     <div className="min-h-screen flex flex-col bg-background text-foreground">
-      <Header />
-      <main className="py-12 px-6 md:px-12">
+      <TopNavBar />
+      <main className="pt-20 py-12 px-6 md:px-12">
         <div className="max-w-7xl mx-auto space-y-8">
           <div className="flex flex-col lg:flex-row gap-8">
             <aside className="w-full lg:w-64 flex-shrink-0 space-y-6">
