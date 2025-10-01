@@ -16,22 +16,24 @@ import {
 
 const StudyMaterialsSection = () => {
   return (
-    <div className="space-y-6">
+    <div className="space-y-8">
       <div>
-        <h1 className="text-3xl font-bold mb-2">Study Materials Hub</h1>
-        <p className="text-muted-foreground">
+        <h1 className="text-4xl font-bold mb-3 text-foreground tracking-tight">Study Materials Hub</h1>
+        <p className="text-muted-foreground text-lg">
           Complete UPSC syllabus coverage with progress tracking
         </p>
       </div>
 
       {/* Syllabus Coverage */}
-      <Card>
+      <Card className="border-2 hover:border-primary/50 hover:shadow-lg transition-all duration-300">
         <CardHeader>
-          <CardTitle className="flex items-center gap-2">
-            <Target className="h-5 w-5" />
+          <CardTitle className="flex items-center gap-3 text-xl">
+            <div className="p-2 bg-primary/10 rounded-lg">
+              <Target className="h-5 w-5 text-primary" />
+            </div>
             Syllabus Coverage Map
           </CardTitle>
-          <CardDescription>
+          <CardDescription className="text-base">
             Track your progress across the complete UPSC syllabus
           </CardDescription>
         </CardHeader>

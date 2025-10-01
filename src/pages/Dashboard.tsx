@@ -46,109 +46,111 @@ const Dashboard = () => {
   const [sidebarOpen, setSidebarOpen] = useState(false);
 
   const sidebarItems = useMemo(() => [
-    { id: 'overview', label: 'Overview', icon: Target, color: 'text-blue-600' },
-    { id: 'ai-mentor', label: 'AI Mentor', icon: Brain, color: 'text-purple-600' },
-    { id: 'study-plan', label: 'Study Plan', icon: Calendar, color: 'text-green-600' },
-    { id: 'practice', label: 'Practice Center', icon: BarChart3, color: 'text-orange-600' },
-    { id: 'materials', label: 'Study Materials', icon: BookOpen, color: 'text-indigo-600' },
-    { id: 'evaluation', label: 'Answer Evaluation', icon: Upload, color: 'text-red-600' },
-    { id: 'current-affairs', label: 'Current Affairs', icon: Globe, color: 'text-cyan-600' },
-    { id: 'community', label: 'Community', icon: Users, color: 'text-pink-600' },
+    { id: 'overview', label: 'Overview', icon: Target },
+    { id: 'ai-mentor', label: 'AI Mentor', icon: Brain },
+    { id: 'study-plan', label: 'Study Plan', icon: Calendar },
+    { id: 'practice', label: 'Practice Center', icon: BarChart3 },
+    { id: 'materials', label: 'Study Materials', icon: BookOpen },
+    { id: 'evaluation', label: 'Answer Evaluation', icon: Upload },
+    { id: 'current-affairs', label: 'Current Affairs', icon: Globe },
+    { id: 'community', label: 'Community', icon: Users },
   ], []);
 
   const OverviewSection = useMemo(() => {
     return (
     <div className="space-y-8">
       {/* Welcome Header */}
-      <div className="relative overflow-hidden bg-gradient-to-br from-slate-50 via-white to-slate-50 dark:from-slate-900 dark:via-slate-800 dark:to-slate-900 p-8 rounded-3xl border-2 border-dashed border-slate-300 dark:border-slate-600 shadow-sm">
-        <div className="absolute inset-0 bg-gradient-to-r from-blue-500/5 via-purple-500/5 to-indigo-500/5 dark:from-blue-400/10 dark:via-purple-400/10 dark:to-indigo-400/10"></div>
-        <div className="relative flex items-center justify-between">
-          <div className="space-y-3">
-            <div className="flex items-center gap-3">
-              <div className="w-2 h-8 bg-gradient-to-b from-blue-500 to-purple-500 rounded-full"></div>
-              <h1 className="text-3xl font-bold bg-gradient-to-r from-slate-900 to-slate-700 dark:from-slate-100 dark:to-slate-300 bg-clip-text text-transparent">
-                Welcome back, Aspirant
-              </h1>
-            </div>
-            <p className="text-slate-600 dark:text-slate-400 text-lg font-medium">
-              Ready to conquer your UPSC journey today?
-            </p>
-            <div className="flex items-center gap-4 text-sm text-slate-500 dark:text-slate-400">
-              <div className="flex items-center gap-2">
-                <div className="w-2 h-2 bg-green-500 rounded-full"></div>
-                <span>Last active: 2 hours ago</span>
+      <Card className="relative overflow-hidden border-2">
+        <div className="absolute inset-0 cosmic-gradient opacity-30" />
+        <CardContent className="relative p-8">
+          <div className="flex items-center justify-between">
+            <div className="space-y-3">
+              <div className="flex items-center gap-3">
+                <div className="w-2 h-10 bg-primary rounded-full" />
+                <h1 className="text-3xl md:text-4xl font-bold text-foreground tracking-tight">
+                  Welcome back, Aspirant
+                </h1>
               </div>
-              <div className="flex items-center gap-2">
-                <div className="w-2 h-2 bg-blue-500 rounded-full"></div>
-                <span>Study streak: 47 days</span>
+              <p className="text-muted-foreground text-lg">
+                Ready to conquer your UPSC journey today?
+              </p>
+              <div className="flex flex-wrap items-center gap-4 text-sm text-muted-foreground">
+                <div className="flex items-center gap-2">
+                  <div className="w-2 h-2 bg-primary rounded-full animate-pulse" />
+                  <span>Last active: 2 hours ago</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <Flame className="w-4 h-4 text-primary" />
+                  <span>Study streak: <strong className="text-foreground">47 days</strong></span>
+                </div>
+              </div>
+            </div>
+            <div className="hidden md:block">
+              <div className="w-24 h-24 bg-primary/10 rounded-2xl flex items-center justify-center">
+                <Trophy className="h-12 w-12 text-primary" />
               </div>
             </div>
           </div>
-          <div className="hidden md:block">
-            <div className="w-24 h-24 bg-gradient-to-br from-blue-500/20 to-purple-500/20 dark:from-blue-400/30 dark:to-purple-400/30 rounded-2xl flex items-center justify-center backdrop-blur-sm">
-              <Trophy className="h-12 w-12 text-blue-600 dark:text-blue-400" />
-            </div>
-          </div>
-        </div>
-      </div>
+        </CardContent>
+      </Card>
 
       {/* Stats Grid */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-        <Card className="group hover:shadow-lg transition-all duration-300 border-2 border-dashed border-slate-300 dark:border-slate-600 bg-white/50 dark:bg-slate-800/50 backdrop-blur-sm">
+        <Card className="group hover:border-primary/50 hover:shadow-lg transition-all duration-300 border-2">
           <CardContent className="p-6">
             <div className="flex items-center justify-between">
               <div className="space-y-2">
-                <p className="text-slate-600 dark:text-slate-400 text-sm font-medium">Study Streak</p>
-                <p className="text-3xl font-bold text-slate-900 dark:text-slate-100">47</p>
-                <p className="text-xs text-slate-500 dark:text-slate-400">Days</p>
+                <p className="text-muted-foreground text-sm font-medium">Study Streak</p>
+                <p className="text-4xl font-bold text-foreground">47</p>
+                <p className="text-xs text-muted-foreground">Days</p>
               </div>
-              <div className="p-3 bg-gradient-to-br from-orange-500/10 to-red-500/10 rounded-2xl group-hover:scale-110 transition-transform">
-                <Flame className="h-6 w-6 text-orange-500" />
+              <div className="p-4 bg-primary/10 rounded-2xl group-hover:scale-110 transition-transform">
+                <Flame className="h-8 w-8 text-primary" />
               </div>
             </div>
           </CardContent>
         </Card>
 
-        <Card className="group hover:shadow-lg transition-all duration-300 border-2 border-dashed border-slate-300 dark:border-slate-600 bg-white/50 dark:bg-slate-800/50 backdrop-blur-sm">
+        <Card className="group hover:border-primary/50 hover:shadow-lg transition-all duration-300 border-2">
           <CardContent className="p-6">
             <div className="flex items-center justify-between">
               <div className="space-y-2">
-                <p className="text-slate-600 dark:text-slate-400 text-sm font-medium">Today's Progress</p>
-                <p className="text-3xl font-bold text-slate-900 dark:text-slate-100">75%</p>
-                <p className="text-xs text-slate-500 dark:text-slate-400">Completed</p>
+                <p className="text-muted-foreground text-sm font-medium">Today's Progress</p>
+                <p className="text-4xl font-bold text-foreground">75%</p>
+                <p className="text-xs text-muted-foreground">Completed</p>
               </div>
-              <div className="p-3 bg-gradient-to-br from-green-500/10 to-emerald-500/10 rounded-2xl group-hover:scale-110 transition-transform">
-                <Target className="h-6 w-6 text-green-500" />
+              <div className="p-4 bg-primary/10 rounded-2xl group-hover:scale-110 transition-transform">
+                <Target className="h-8 w-8 text-primary" />
               </div>
             </div>
           </CardContent>
         </Card>
 
-        <Card className="group hover:shadow-lg transition-all duration-300 border-2 border-dashed border-slate-300 dark:border-slate-600 bg-white/50 dark:bg-slate-800/50 backdrop-blur-sm">
+        <Card className="group hover:border-primary/50 hover:shadow-lg transition-all duration-300 border-2">
           <CardContent className="p-6">
             <div className="flex items-center justify-between">
               <div className="space-y-2">
-                <p className="text-slate-600 dark:text-slate-400 text-sm font-medium">Community Rank</p>
-                <p className="text-3xl font-bold text-slate-900 dark:text-slate-100">#47</p>
-                <p className="text-xs text-slate-500 dark:text-slate-400">Top 5%</p>
+                <p className="text-muted-foreground text-sm font-medium">Community Rank</p>
+                <p className="text-4xl font-bold text-foreground">#47</p>
+                <p className="text-xs text-muted-foreground">Top 5%</p>
               </div>
-              <div className="p-3 bg-gradient-to-br from-blue-500/10 to-cyan-500/10 rounded-2xl group-hover:scale-110 transition-transform">
-                <Trophy className="h-6 w-6 text-blue-500" />
+              <div className="p-4 bg-primary/10 rounded-2xl group-hover:scale-110 transition-transform">
+                <Trophy className="h-8 w-8 text-primary" />
               </div>
             </div>
           </CardContent>
         </Card>
 
-        <Card className="group hover:shadow-lg transition-all duration-300 border-2 border-dashed border-slate-300 dark:border-slate-600 bg-white/50 dark:bg-slate-800/50 backdrop-blur-sm">
+        <Card className="group hover:border-primary/50 hover:shadow-lg transition-all duration-300 border-2">
           <CardContent className="p-6">
             <div className="flex items-center justify-between">
               <div className="space-y-2">
-                <p className="text-slate-600 dark:text-slate-400 text-sm font-medium">AI Sessions</p>
-                <p className="text-3xl font-bold text-slate-900 dark:text-slate-100">156</p>
-                <p className="text-xs text-slate-500 dark:text-slate-400">This month</p>
+                <p className="text-muted-foreground text-sm font-medium">AI Sessions</p>
+                <p className="text-4xl font-bold text-foreground">156</p>
+                <p className="text-xs text-muted-foreground">This month</p>
               </div>
-              <div className="p-3 bg-gradient-to-br from-purple-500/10 to-pink-500/10 rounded-2xl group-hover:scale-110 transition-transform">
-                <Brain className="h-6 w-6 text-purple-500" />
+              <div className="p-4 bg-primary/10 rounded-2xl group-hover:scale-110 transition-transform">
+                <Brain className="h-8 w-8 text-primary" />
               </div>
             </div>
           </CardContent>
@@ -159,14 +161,14 @@ const Dashboard = () => {
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
         {/* Today's Tasks */}
         <div className="lg:col-span-2">
-          <Card className="h-full border-2 border-dashed border-slate-300 dark:border-slate-600 bg-white/50 dark:bg-slate-800/50 backdrop-blur-sm">
+          <Card className="h-full border-2">
             <CardHeader className="pb-6">
               <div className="flex items-center justify-between">
                 <div className="space-y-1">
-                  <CardTitle className="text-2xl font-bold text-slate-900 dark:text-slate-100">Today's Study Plan</CardTitle>
-                  <CardDescription className="text-slate-600 dark:text-slate-400">Your personalized daily agenda</CardDescription>
+                  <CardTitle className="text-2xl font-bold text-foreground">Today's Study Plan</CardTitle>
+                  <CardDescription>Your personalized daily agenda</CardDescription>
                 </div>
-                <Button variant="outline" size="sm" className="border-slate-200 dark:border-slate-700 hover:bg-slate-50 dark:hover:bg-slate-700">
+                <Button variant="outline" size="sm">
                   <Settings className="h-4 w-4 mr-2" />
                   Customize
                 </Button>
@@ -181,33 +183,28 @@ const Dashboard = () => {
                 { title: 'Optional Subject Revision', status: 'pending', time: '16:00 - 17:30' },
               ].map((task, index) => (
                 <div key={index} className={cn(
-                  "group flex items-center justify-between p-4 rounded-2xl border transition-all duration-200 hover:shadow-md",
-                  task.status === 'completed' && "bg-green-50/50 dark:bg-green-950/10 border-green-200/50 dark:border-green-800/30",
-                  task.status === 'in-progress' && "bg-orange-50/50 dark:bg-orange-950/10 border-orange-200/50 dark:border-orange-800/30",
-                  task.status === 'pending' && "bg-slate-50/50 dark:bg-slate-800/30 border-slate-200/50 dark:border-slate-700/30"
+                  "group flex items-center justify-between p-4 rounded-xl border-2 transition-all duration-200 hover:shadow-md",
+                  task.status === 'completed' && "bg-primary/5 border-primary/20",
+                  task.status === 'in-progress' && "bg-primary/10 border-primary/30",
+                  task.status === 'pending' && "bg-muted/30 border-border"
                 )}>
                   <div className="flex items-center gap-4">
                     <div className={cn(
                       "p-2.5 rounded-xl transition-all duration-200",
-                      task.status === 'completed' && "bg-green-500 text-white shadow-sm",
-                      task.status === 'in-progress' && "bg-orange-500 text-white shadow-sm",
-                      task.status === 'pending' && "bg-slate-300 dark:bg-slate-600 text-slate-600 dark:text-slate-300"
+                      task.status === 'completed' && "bg-primary text-primary-foreground",
+                      task.status === 'in-progress' && "bg-primary text-primary-foreground",
+                      task.status === 'pending' && "bg-muted text-muted-foreground"
                     )}>
-                      {task.status === 'completed' && <CheckCircle className="h-4 w-4" />}
-                      {task.status === 'in-progress' && <Clock className="h-4 w-4" />}
-                      {task.status === 'pending' && <Calendar className="h-4 w-4" />}
+                      {task.status === 'completed' && <CheckCircle className="h-5 w-5" />}
+                      {task.status === 'in-progress' && <Clock className="h-5 w-5" />}
+                      {task.status === 'pending' && <Calendar className="h-5 w-5" />}
                     </div>
                     <div className="space-y-1">
-                      <p className="font-semibold text-slate-900 dark:text-slate-100">{task.title}</p>
-                      <p className="text-sm text-slate-500 dark:text-slate-400">{task.time}</p>
+                      <p className="font-semibold text-foreground">{task.title}</p>
+                      <p className="text-sm text-muted-foreground">{task.time}</p>
                     </div>
                   </div>
-                  <Badge className={cn(
-                    "px-3 py-1 text-xs font-medium",
-                    task.status === 'completed' && "bg-green-100 text-green-700 dark:bg-green-900/30 dark:text-green-400",
-                    task.status === 'in-progress' && "bg-orange-100 text-orange-700 dark:bg-orange-900/30 dark:text-orange-400",
-                    task.status === 'pending' && "bg-slate-100 text-slate-700 dark:bg-slate-700 dark:text-slate-400"
-                  )}>
+                  <Badge variant={task.status === 'pending' ? 'secondary' : 'default'}>
                     {task.status === 'completed' ? 'Done' : 
                      task.status === 'in-progress' ? 'Active' : 'Pending'}
                   </Badge>
@@ -220,55 +217,55 @@ const Dashboard = () => {
         {/* Quick Actions & Progress */}
         <div className="space-y-6">
           {/* Progress Card */}
-          <Card className="border-2 border-dashed border-slate-300 dark:border-slate-600 bg-white/50 dark:bg-slate-800/50 backdrop-blur-sm">
+          <Card className="border-2">
             <CardHeader className="pb-4">
-              <CardTitle className="text-lg font-bold text-slate-900 dark:text-slate-100">Weekly Progress</CardTitle>
+              <CardTitle className="text-lg font-bold text-foreground">Weekly Progress</CardTitle>
             </CardHeader>
             <CardContent className="space-y-6">
               <div className="space-y-4">
                 <div className="flex justify-between items-center">
-                  <span className="text-sm font-medium text-slate-600 dark:text-slate-400">Study Hours</span>
-                  <span className="text-sm font-bold text-slate-900 dark:text-slate-100">32/40 hrs</span>
+                  <span className="text-sm font-medium text-muted-foreground">Study Hours</span>
+                  <span className="text-sm font-bold text-foreground">32/40 hrs</span>
                 </div>
-                <Progress value={80} className="h-2 bg-slate-200 dark:bg-slate-700" />
+                <Progress value={80} className="h-2" />
               </div>
               <div className="space-y-4">
                 <div className="flex justify-between items-center">
-                  <span className="text-sm font-medium text-slate-600 dark:text-slate-400">Mock Tests</span>
-                  <span className="text-sm font-bold text-slate-900 dark:text-slate-100">3/4 tests</span>
+                  <span className="text-sm font-medium text-muted-foreground">Mock Tests</span>
+                  <span className="text-sm font-bold text-foreground">3/4 tests</span>
                 </div>
-                <Progress value={75} className="h-2 bg-slate-200 dark:bg-slate-700" />
+                <Progress value={75} className="h-2" />
               </div>
               <div className="space-y-4">
                 <div className="flex justify-between items-center">
-                  <span className="text-sm font-medium text-slate-600 dark:text-slate-400">Revision</span>
-                  <span className="text-sm font-bold text-slate-900 dark:text-slate-100">6/8 topics</span>
+                  <span className="text-sm font-medium text-muted-foreground">Revision</span>
+                  <span className="text-sm font-bold text-foreground">6/8 topics</span>
                 </div>
-                <Progress value={75} className="h-2 bg-slate-200 dark:bg-slate-700" />
+                <Progress value={75} className="h-2" />
               </div>
             </CardContent>
           </Card>
 
           {/* Quick Actions */}
-          <Card className="border-2 border-dashed border-slate-300 dark:border-slate-600 bg-white/50 dark:bg-slate-800/50 backdrop-blur-sm">
+          <Card className="border-2">
             <CardHeader className="pb-4">
-              <CardTitle className="text-lg font-bold text-slate-900 dark:text-slate-100">Quick Actions</CardTitle>
+              <CardTitle className="text-lg font-bold text-foreground">Quick Actions</CardTitle>
             </CardHeader>
             <CardContent className="grid grid-cols-2 gap-3">
-              <Button variant="outline" className="h-16 flex-col gap-2 border-slate-200 dark:border-slate-700 hover:bg-slate-50 dark:hover:bg-slate-700 transition-all duration-200">
-                <PlayCircle className="h-5 w-5 text-blue-500" />
+              <Button variant="outline" className="h-20 flex-col gap-2 border-2 hover:bg-muted hover:border-primary/50 transition-all duration-200">
+                <PlayCircle className="h-6 w-6 text-primary" />
                 <span className="text-xs font-medium">Start Study</span>
               </Button>
-              <Button variant="outline" className="h-16 flex-col gap-2 border-slate-200 dark:border-slate-700 hover:bg-slate-50 dark:hover:bg-slate-700 transition-all duration-200">
-                <Upload className="h-5 w-5 text-green-500" />
+              <Button variant="outline" className="h-20 flex-col gap-2 border-2 hover:bg-muted hover:border-primary/50 transition-all duration-200">
+                <Upload className="h-6 w-6 text-primary" />
                 <span className="text-xs font-medium">Upload Answer</span>
               </Button>
-              <Button variant="outline" className="h-16 flex-col gap-2 border-slate-200 dark:border-slate-700 hover:bg-slate-50 dark:hover:bg-slate-700 transition-all duration-200">
-                <Brain className="h-5 w-5 text-purple-500" />
+              <Button variant="outline" className="h-20 flex-col gap-2 border-2 hover:bg-muted hover:border-primary/50 transition-all duration-200">
+                <Brain className="h-6 w-6 text-primary" />
                 <span className="text-xs font-medium">Ask AI</span>
               </Button>
-              <Button variant="outline" className="h-16 flex-col gap-2 border-slate-200 dark:border-slate-700 hover:bg-slate-50 dark:hover:bg-slate-700 transition-all duration-200">
-                <BarChart3 className="h-5 w-5 text-orange-500" />
+              <Button variant="outline" className="h-20 flex-col gap-2 border-2 hover:bg-muted hover:border-primary/50 transition-all duration-200">
+                <BarChart3 className="h-6 w-6 text-primary" />
                 <span className="text-xs font-medium">Take Test</span>
               </Button>
             </CardContent>
@@ -1451,26 +1448,26 @@ const Dashboard = () => {
       <div className="flex pt-16">
         {/* Sidebar */}
         <div className={cn(
-          "fixed left-0 top-16 h-[calc(100vh-4rem)] w-80 bg-white/80 dark:bg-slate-900/80 backdrop-blur-xl border-r border-slate-200/50 dark:border-slate-700/50 transform transition-transform duration-300 ease-in-out z-40 overflow-y-auto",
+          "fixed left-0 top-16 h-[calc(100vh-4rem)] w-80 bg-card/95 backdrop-blur-xl border-r border-border transform transition-transform duration-300 ease-in-out z-40 overflow-y-auto shadow-lg",
           sidebarOpen ? "translate-x-0" : "-translate-x-full",
           "lg:translate-x-0"
         )}>
           <div className="p-6">
             {/* User Profile */}
-            <div className="flex items-center gap-4 p-4 bg-gradient-to-r from-slate-50 to-slate-100 dark:from-slate-800 dark:to-slate-700 rounded-2xl mb-6 border border-slate-200/50 dark:border-slate-600/50">
-              <Avatar className="h-12 w-12 ring-2 ring-slate-200 dark:ring-slate-600">
+            <div className="flex items-center gap-4 p-4 bg-primary/5 rounded-2xl mb-6 border-2 border-primary/10">
+              <Avatar className="h-12 w-12 ring-2 ring-primary/20">
                 <AvatarImage src="/placeholder-avatar.jpg" />
-                <AvatarFallback className="bg-gradient-to-br from-blue-500 to-purple-500 text-white font-bold">AS</AvatarFallback>
+                <AvatarFallback className="bg-primary text-primary-foreground font-bold">AS</AvatarFallback>
               </Avatar>
               <div className="space-y-1">
-                <p className="font-bold text-slate-900 dark:text-slate-100">UPSC Aspirant</p>
-                <p className="text-sm text-slate-600 dark:text-slate-400">Rank Goal: Top 100</p>
+                <p className="font-bold text-foreground">UPSC Aspirant</p>
+                <p className="text-sm text-muted-foreground">Rank Goal: Top 100</p>
               </div>
             </div>
 
             {/* Navigation Items */}
             <nav className="space-y-1">
-              <h3 className="text-sm font-bold text-slate-600 dark:text-slate-400 mb-4 px-3 uppercase tracking-wider">Dashboard</h3>
+              <h3 className="text-sm font-bold text-muted-foreground mb-4 px-3 uppercase tracking-wider">Dashboard</h3>
               {sidebarItems.map((item) => {
                 const Icon = item.icon;
                 return (
@@ -1480,18 +1477,18 @@ const Dashboard = () => {
                     className={cn(
                       "w-full justify-start h-12 px-4 rounded-xl transition-all duration-200",
                       activeSection === item.id 
-                        ? "bg-black text-white shadow-lg border-2 border-dashed border-white/30" 
-                        : "hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-700 dark:text-slate-300"
+                        ? "bg-primary text-primary-foreground shadow-md" 
+                        : "hover:bg-muted text-foreground"
                     )}
                     onClick={useCallback(() => {
                       setActiveSection(item.id);
                       setSidebarOpen(false);
                     }, [item.id])}
                   >
-                    <Icon className={cn("h-5 w-5 mr-3", activeSection === item.id ? "text-white" : item.color)} />
+                    <Icon className={cn("h-5 w-5 mr-3", activeSection === item.id ? "text-primary-foreground" : "text-primary")} />
                     <span className="font-medium">{item.label}</span>
                     {activeSection === item.id && (
-                      <ChevronRight className="h-4 w-4 ml-auto text-white" />
+                      <ChevronRight className="h-4 w-4 ml-auto" />
                     )}
                   </Button>
                 );
@@ -1499,29 +1496,29 @@ const Dashboard = () => {
             </nav>
 
             {/* Quick Stats */}
-            <div className="mt-8 p-4 bg-gradient-to-br from-slate-50 to-slate-100 dark:from-slate-800 dark:to-slate-700 rounded-2xl border border-slate-200/50 dark:border-slate-600/50">
-              <h3 className="font-bold text-sm mb-4 text-slate-700 dark:text-slate-300 uppercase tracking-wider">Quick Stats</h3>
+            <div className="mt-8 p-4 bg-muted/50 rounded-2xl border-2 border-border">
+              <h3 className="font-bold text-sm mb-4 text-foreground uppercase tracking-wider">Quick Stats</h3>
               <div className="space-y-4 text-sm">
                 <div className="flex justify-between items-center">
                   <div className="flex items-center gap-2">
-                    <div className="w-2 h-2 bg-orange-500 rounded-full"></div>
-                    <span className="text-slate-600 dark:text-slate-400">Study Streak</span>
+                    <div className="w-2 h-2 bg-primary rounded-full"></div>
+                    <span className="text-muted-foreground">Study Streak</span>
                   </div>
-                  <span className="font-bold text-slate-900 dark:text-slate-100">47 days</span>
+                  <span className="font-bold text-foreground">47 days</span>
                 </div>
                 <div className="flex justify-between items-center">
                   <div className="flex items-center gap-2">
-                    <div className="w-2 h-2 bg-green-500 rounded-full"></div>
-                    <span className="text-slate-600 dark:text-slate-400">Progress Today</span>
+                    <div className="w-2 h-2 bg-primary rounded-full"></div>
+                    <span className="text-muted-foreground">Progress Today</span>
                   </div>
-                  <span className="font-bold text-slate-900 dark:text-slate-100">75%</span>
+                  <span className="font-bold text-foreground">75%</span>
                 </div>
                 <div className="flex justify-between items-center">
                   <div className="flex items-center gap-2">
-                    <div className="w-2 h-2 bg-blue-500 rounded-full"></div>
-                    <span className="text-slate-600 dark:text-slate-400">Rank</span>
+                    <div className="w-2 h-2 bg-primary rounded-full"></div>
+                    <span className="text-muted-foreground">Rank</span>
                   </div>
-                  <span className="font-bold text-slate-900 dark:text-slate-100">#47</span>
+                  <span className="font-bold text-foreground">#47</span>
                 </div>
               </div>
             </div>

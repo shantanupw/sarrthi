@@ -108,34 +108,26 @@ const About = () => {
       <main className="pt-16">
         {/* Hero Section */}
         <section className="relative min-h-[80vh] flex items-center justify-center py-20 px-6 md:px-12 overflow-hidden">
-          {/* Background Effects */}
-          <div className="absolute inset-0" style={{
-            background: 'linear-gradient(135deg, rgba(248,168,36,0.12) 0%, rgba(254,254,254,0.06) 100%)'
-          }} />
-          <div className="absolute top-1/4 right-1/4 w-96 h-96" style={{
-            background: 'radial-gradient(circle at center, rgba(248,168,36,0.2), transparent 60%)'
-          }} />
-          <div className="absolute bottom-1/4 left-1/4 w-64 h-64" style={{
-            background: 'radial-gradient(circle at center, rgba(254,254,254,0.18), transparent 60%)'
-          }} />
+          <div className="absolute inset-0 cosmic-gradient opacity-40" />
+          <div className="absolute inset-0 cosmic-grid opacity-30" />
           
           <div className="relative w-full max-w-7xl mx-auto text-center">
-            <Badge className="mb-6 bg-primary/10 text-primary border-primary/20">
+            <Badge className="mb-6 bg-primary/10 text-primary border-primary/20 px-4 py-2">
               About Sarrthi IAS
             </Badge>
-            <h1 className="text-5xl md:text-6xl font-bold tracking-tight text-foreground mb-6">
+            <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold tracking-tighter text-foreground mb-6">
               Empowering Future
-              <span className="text-primary"> Civil Servants</span>
+              <span className="block text-primary mt-2">Civil Servants</span>
             </h1>
-            <p className="text-xl text-muted-foreground mb-8 leading-relaxed max-w-3xl mx-auto">
+            <p className="text-lg md:text-xl text-muted-foreground mb-10 leading-relaxed max-w-3xl mx-auto">
               We are a world-class UPSC preparation platform dedicated to transforming ambitious individuals 
               into successful civil servants through innovative learning, expert mentorship, and cutting-edge technology.
             </p>
             <div className="flex flex-wrap justify-center gap-4">
-              <Button size="lg" className="bg-primary text-primary-foreground hover:bg-primary/90">
+              <Button size="lg" className="brand-gradient h-12 px-8 text-base">
                 Start Your Journey
               </Button>
-              <Button variant="outline" size="lg" className="border-border hover:bg-muted">
+              <Button variant="outline" size="lg" className="h-12 px-8 text-base border-2">
                 Meet Our Team
               </Button>
             </div>
@@ -143,23 +135,25 @@ const About = () => {
         </section>
 
         {/* Stats Section */}
-        <section className="py-20 px-6 md:px-12 bg-background">
+        <section className="py-20 px-6 md:px-12 bg-muted/30">
           <div className="max-w-7xl mx-auto">
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
               {stats.map((stat, index) => {
                 const Icon = stat.icon;
                 return (
-                  <div key={index} className="text-center space-y-4 p-6 rounded-lg border border-border bg-card">
-                    <div className="w-12 h-12 mx-auto bg-primary/10 rounded-full flex items-center justify-center">
-                      <Icon className="w-6 h-6 text-primary" />
-                    </div>
-                    <div className="font-bold text-2xl text-foreground">
-                      {stat.value}
-                    </div>
-                    <div className="text-sm text-muted-foreground">
-                      {stat.label}
-                    </div>
-                  </div>
+                  <Card key={index} className="text-center border-2 hover:border-primary/50 hover:shadow-lg transition-all duration-300">
+                    <CardContent className="p-8">
+                      <div className="w-16 h-16 mx-auto mb-4 bg-primary/10 rounded-2xl flex items-center justify-center group-hover:scale-110 transition-transform">
+                        <Icon className="w-8 h-8 text-primary" />
+                      </div>
+                      <div className="font-bold text-4xl text-foreground mb-2">
+                        {stat.value}
+                      </div>
+                      <div className="text-sm font-medium text-muted-foreground">
+                        {stat.label}
+                      </div>
+                    </CardContent>
+                  </Card>
                 );
               })}
             </div>
@@ -167,10 +161,10 @@ const About = () => {
         </section>
 
         {/* Mission & Vision */}
-        <section className="py-20 px-6 md:px-12 bg-card">
+        <section className="py-20 px-6 md:px-12 bg-background">
           <div className="max-w-7xl mx-auto">
             <div className="text-center space-y-4 max-w-3xl mx-auto mb-16">
-              <h2 className="text-3xl md:text-4xl font-medium tracking-tighter text-foreground">
+              <h2 className="text-4xl md:text-5xl font-bold tracking-tighter text-foreground">
                 Our Mission & Vision
               </h2>
               <p className="text-muted-foreground text-lg">
@@ -179,34 +173,34 @@ const About = () => {
             </div>
             
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-              <Card className="border border-border bg-card">
-                <CardHeader>
-                  <div className="flex items-center gap-3 mb-4">
-                    <div className="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center">
-                      <Target className="h-6 w-6 text-primary" />
+              <Card className="border-2 hover:border-primary/50 hover:shadow-xl transition-all duration-300">
+                <CardHeader className="pb-6">
+                  <div className="flex items-center gap-4 mb-2">
+                    <div className="w-14 h-14 bg-primary/10 rounded-2xl flex items-center justify-center">
+                      <Target className="h-7 w-7 text-primary" />
                     </div>
-                    <CardTitle className="text-2xl text-foreground">Our Mission</CardTitle>
+                    <CardTitle className="text-2xl md:text-3xl font-bold text-foreground">Our Mission</CardTitle>
                   </div>
                 </CardHeader>
                 <CardContent>
-                  <p className="text-muted-foreground leading-relaxed text-lg">
+                  <p className="text-muted-foreground leading-relaxed text-base md:text-lg">
                     To democratize UPSC preparation by providing world-class education, personalized mentorship, 
                     and innovative learning tools that empower every aspirant to achieve their dreams of serving the nation.
                   </p>
                 </CardContent>
               </Card>
 
-              <Card className="border border-border bg-card">
-                <CardHeader>
-                  <div className="flex items-center gap-3 mb-4">
-                    <div className="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center">
-                      <Star className="h-6 w-6 text-primary" />
+              <Card className="border-2 hover:border-primary/50 hover:shadow-xl transition-all duration-300">
+                <CardHeader className="pb-6">
+                  <div className="flex items-center gap-4 mb-2">
+                    <div className="w-14 h-14 bg-primary/10 rounded-2xl flex items-center justify-center">
+                      <Star className="h-7 w-7 text-primary" />
                     </div>
-                    <CardTitle className="text-2xl text-foreground">Our Vision</CardTitle>
+                    <CardTitle className="text-2xl md:text-3xl font-bold text-foreground">Our Vision</CardTitle>
                   </div>
                 </CardHeader>
                 <CardContent>
-                  <p className="text-muted-foreground leading-relaxed text-lg">
+                  <p className="text-muted-foreground leading-relaxed text-base md:text-lg">
                     To become the world's leading platform for civil service preparation, recognized for 
                     producing ethical, competent, and visionary leaders who will shape India's future.
                   </p>
@@ -217,10 +211,10 @@ const About = () => {
         </section>
 
         {/* Values Section */}
-        <section className="py-20 px-6 md:px-12 bg-background">
+        <section className="py-20 px-6 md:px-12 bg-muted/30">
           <div className="max-w-7xl mx-auto">
             <div className="text-center space-y-4 max-w-3xl mx-auto mb-16">
-              <h2 className="text-3xl md:text-4xl font-medium tracking-tighter text-foreground">
+              <h2 className="text-4xl md:text-5xl font-bold tracking-tighter text-foreground">
                 Our Core Values
               </h2>
               <p className="text-muted-foreground text-lg">
@@ -232,17 +226,19 @@ const About = () => {
               {values.map((value, index) => {
                 const Icon = value.icon;
                 return (
-                  <div key={index} className="text-center space-y-4 p-6 rounded-lg border border-border bg-card">
-                    <div className="w-12 h-12 mx-auto bg-primary/10 rounded-full flex items-center justify-center">
-                      <Icon className="w-6 h-6 text-primary" />
-                    </div>
-                    <h3 className="font-semibold text-foreground">
-                      {value.title}
-                    </h3>
-                    <p className="text-sm text-muted-foreground">
-                      {value.description}
-                    </p>
-                  </div>
+                  <Card key={index} className="text-center border-2 hover:border-primary/50 hover:shadow-lg transition-all duration-300 group">
+                    <CardContent className="p-8">
+                      <div className="w-16 h-16 mx-auto mb-4 bg-primary/10 rounded-2xl flex items-center justify-center group-hover:scale-110 transition-transform">
+                        <Icon className="w-8 h-8 text-primary" />
+                      </div>
+                      <h3 className="font-bold text-lg mb-3 text-foreground">
+                        {value.title}
+                      </h3>
+                      <p className="text-sm text-muted-foreground leading-relaxed">
+                        {value.description}
+                      </p>
+                    </CardContent>
+                  </Card>
                 );
               })}
             </div>
@@ -250,10 +246,10 @@ const About = () => {
         </section>
 
         {/* Features Section */}
-        <section className="py-20 px-6 md:px-12 bg-card">
+        <section className="py-20 px-6 md:px-12 bg-background">
           <div className="max-w-7xl mx-auto">
             <div className="text-center space-y-4 max-w-3xl mx-auto mb-16">
-              <h2 className="text-3xl md:text-4xl font-medium tracking-tighter text-foreground">
+              <h2 className="text-4xl md:text-5xl font-bold tracking-tighter text-foreground">
                 Why Choose Sarrthi?
               </h2>
               <p className="text-muted-foreground text-lg">
@@ -261,21 +257,23 @@ const About = () => {
               </p>
             </div>
             
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
               {features.map((feature, index) => {
                 const Icon = feature.icon;
                 return (
-                  <div key={index} className="text-center space-y-4 p-6 rounded-lg border border-border bg-background">
-                    <div className="w-12 h-12 mx-auto bg-primary/10 rounded-full flex items-center justify-center">
-                      <Icon className="w-6 h-6 text-primary" />
-                    </div>
-                    <h3 className="font-semibold text-foreground">
-                      {feature.title}
-                    </h3>
-                    <p className="text-sm text-muted-foreground">
-                      {feature.description}
-                    </p>
-                  </div>
+                  <Card key={index} className="border-2 hover:border-primary/50 hover:shadow-xl transition-all duration-300 group">
+                    <CardContent className="p-8 text-center">
+                      <div className="w-16 h-16 mx-auto mb-6 bg-primary/10 rounded-2xl flex items-center justify-center group-hover:scale-110 transition-transform">
+                        <Icon className="w-8 h-8 text-primary" />
+                      </div>
+                      <h3 className="font-bold text-xl mb-3 text-foreground">
+                        {feature.title}
+                      </h3>
+                      <p className="text-base text-muted-foreground leading-relaxed">
+                        {feature.description}
+                      </p>
+                    </CardContent>
+                  </Card>
                 );
               })}
             </div>
@@ -283,10 +281,10 @@ const About = () => {
         </section>
 
         {/* Team Section */}
-        <section className="py-20 px-6 md:px-12 bg-background">
+        <section className="py-20 px-6 md:px-12 bg-muted/30">
           <div className="max-w-7xl mx-auto">
             <div className="text-center space-y-4 max-w-3xl mx-auto mb-16">
-              <h2 className="text-3xl md:text-4xl font-medium tracking-tighter text-foreground">
+              <h2 className="text-4xl md:text-5xl font-bold tracking-tighter text-foreground">
                 Meet Our Leadership Team
               </h2>
               <p className="text-muted-foreground text-lg">
@@ -296,44 +294,49 @@ const About = () => {
             
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
               {team.map((member, index) => (
-                <div key={index} className="text-center space-y-4 p-6 rounded-lg border border-border bg-card">
-                  <div className="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mx-auto">
-                    <span className="text-lg font-bold text-primary">
-                      {member.name.split(' ').map(n => n[0]).join('')}
-                    </span>
-                  </div>
-                  <h3 className="font-semibold text-foreground">
-                    {member.name}
-                  </h3>
-                  <p className="text-primary font-medium text-sm">
-                    {member.role}
-                  </p>
-                  <p className="text-xs text-muted-foreground">
-                    {member.experience}
-                  </p>
-                  <p className="text-xs text-muted-foreground">
-                    {member.expertise}
-                  </p>
-                </div>
+                <Card key={index} className="text-center border-2 hover:border-primary/50 hover:shadow-lg transition-all duration-300 group">
+                  <CardContent className="p-6">
+                    <div className="w-20 h-20 bg-primary/10 rounded-2xl flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform">
+                      <span className="text-xl font-bold text-primary">
+                        {member.name.split(' ').map(n => n[0]).join('')}
+                      </span>
+                    </div>
+                    <h3 className="font-bold text-lg mb-2 text-foreground">
+                      {member.name}
+                    </h3>
+                    <p className="text-primary font-semibold text-sm mb-3">
+                      {member.role}
+                    </p>
+                    <p className="text-xs text-muted-foreground mb-1">
+                      {member.experience}
+                    </p>
+                    <p className="text-xs text-muted-foreground">
+                      {member.expertise}
+                    </p>
+                  </CardContent>
+                </Card>
               ))}
             </div>
           </div>
         </section>
 
         {/* CTA Section */}
-        <section className="py-20 px-6 md:px-12 bg-primary">
-          <div className="max-w-7xl mx-auto text-center">
-            <h2 className="text-3xl md:text-4xl font-medium tracking-tighter text-primary-foreground mb-6">
+        <section className="py-24 px-6 md:px-12 bg-primary relative overflow-hidden">
+          <div className="absolute inset-0 opacity-10">
+            <div className="absolute inset-0 cosmic-grid" />
+          </div>
+          <div className="max-w-7xl mx-auto text-center relative z-10">
+            <h2 className="text-4xl md:text-5xl font-bold tracking-tighter text-primary-foreground mb-6">
               Ready to Start Your UPSC Journey?
             </h2>
-            <p className="text-lg text-primary-foreground/80 mb-8 leading-relaxed max-w-3xl mx-auto">
+            <p className="text-lg md:text-xl text-primary-foreground/90 mb-10 leading-relaxed max-w-3xl mx-auto">
               Join thousands of successful aspirants who have achieved their dreams with Sarrthi
             </p>
             <div className="flex flex-wrap justify-center gap-4">
-              <Button size="lg" variant="secondary" className="bg-background text-foreground hover:bg-muted">
+              <Button size="lg" variant="secondary" className="h-12 px-8 text-base bg-background text-foreground hover:bg-background/90 border-2 border-background">
                 Get Started Today
               </Button>
-              <Button size="lg" variant="outline" className="border-primary-foreground text-primary-foreground hover:bg-primary-foreground hover:text-primary">
+              <Button size="lg" variant="outline" className="h-12 px-8 text-base border-2 border-primary-foreground text-primary-foreground hover:bg-primary-foreground hover:text-primary">
                 <Phone className="w-4 h-4 mr-2" />
                 Get Free Callback
               </Button>

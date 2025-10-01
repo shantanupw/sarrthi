@@ -29,10 +29,10 @@ import {
 
 const DisciplineEngineSection = () => {
   return (
-    <div className="space-y-6">
+    <div className="space-y-8">
       <div>
-        <h1 className="text-3xl font-bold mb-2">Discipline Engine</h1>
-        <p className="text-muted-foreground">
+        <h1 className="text-4xl font-bold mb-3 text-foreground tracking-tight">Discipline Engine</h1>
+        <p className="text-muted-foreground text-lg">
           Track your consistency and build strong study habits
         </p>
       </div>
@@ -134,72 +134,92 @@ const DisciplineEngineSection = () => {
       </div>
 
       {/* Progress Analytics */}
-      <Card>
+      <Card className="border-2 hover:border-primary/50 hover:shadow-lg transition-all duration-300">
         <CardHeader>
-          <CardTitle className="flex items-center gap-2">
-            <BarChart3 className="h-5 w-5" />
+          <CardTitle className="flex items-center gap-3 text-xl">
+            <div className="p-2 bg-primary/10 rounded-lg">
+              <BarChart3 className="h-5 w-5 text-primary" />
+            </div>
             Progress Analytics
           </CardTitle>
-          <CardDescription>
+          <CardDescription className="text-base">
             Visual insights into your study consistency and improvements
           </CardDescription>
         </CardHeader>
         <CardContent>
           <Tabs defaultValue="weekly" className="w-full">
-            <TabsList className="grid w-full grid-cols-3">
-              <TabsTrigger value="weekly">Weekly</TabsTrigger>
-              <TabsTrigger value="monthly">Monthly</TabsTrigger>
-              <TabsTrigger value="yearly">Yearly</TabsTrigger>
+            <TabsList className="grid w-full grid-cols-3 h-12">
+              <TabsTrigger value="weekly" className="text-sm font-medium">Weekly</TabsTrigger>
+              <TabsTrigger value="monthly" className="text-sm font-medium">Monthly</TabsTrigger>
+              <TabsTrigger value="yearly" className="text-sm font-medium">Yearly</TabsTrigger>
             </TabsList>
             
             <TabsContent value="weekly" className="mt-6">
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                <div className="text-center p-4 bg-green-50 dark:bg-green-950/20 rounded-lg">
-                  <div className="text-2xl font-bold text-green-600 mb-1">42</div>
-                  <p className="text-sm text-muted-foreground">Study Hours</p>
-                </div>
-                <div className="text-center p-4 bg-blue-50 dark:bg-blue-950/20 rounded-lg">
-                  <div className="text-2xl font-bold text-blue-600 mb-1">180</div>
-                  <p className="text-sm text-muted-foreground">Questions Solved</p>
-                </div>
-                <div className="text-center p-4 bg-purple-50 dark:bg-purple-950/20 rounded-lg">
-                  <div className="text-2xl font-bold text-purple-600 mb-1">12</div>
-                  <p className="text-sm text-muted-foreground">Answers Written</p>
-                </div>
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <Card className="text-center border-2">
+                  <CardContent className="p-6">
+                    <div className="text-3xl font-bold text-primary mb-2">42</div>
+                    <p className="text-sm text-muted-foreground">Study Hours</p>
+                  </CardContent>
+                </Card>
+                <Card className="text-center border-2">
+                  <CardContent className="p-6">
+                    <div className="text-3xl font-bold text-primary mb-2">180</div>
+                    <p className="text-sm text-muted-foreground">Questions Solved</p>
+                  </CardContent>
+                </Card>
+                <Card className="text-center border-2">
+                  <CardContent className="p-6">
+                    <div className="text-3xl font-bold text-primary mb-2">12</div>
+                    <p className="text-sm text-muted-foreground">Answers Written</p>
+                  </CardContent>
+                </Card>
               </div>
             </TabsContent>
             
             <TabsContent value="monthly" className="mt-6">
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                <div className="text-center p-4 bg-green-50 dark:bg-green-950/20 rounded-lg">
-                  <div className="text-2xl font-bold text-green-600 mb-1">168</div>
-                  <p className="text-sm text-muted-foreground">Study Hours</p>
-                </div>
-                <div className="text-center p-4 bg-blue-50 dark:bg-blue-950/20 rounded-lg">
-                  <div className="text-2xl font-bold text-blue-600 mb-1">720</div>
-                  <p className="text-sm text-muted-foreground">Questions Solved</p>
-                </div>
-                <div className="text-center p-4 bg-purple-50 dark:bg-purple-950/20 rounded-lg">
-                  <div className="text-2xl font-bold text-purple-600 mb-1">48</div>
-                  <p className="text-sm text-muted-foreground">Answers Written</p>
-                </div>
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <Card className="text-center border-2">
+                  <CardContent className="p-6">
+                    <div className="text-3xl font-bold text-primary mb-2">168</div>
+                    <p className="text-sm text-muted-foreground">Study Hours</p>
+                  </CardContent>
+                </Card>
+                <Card className="text-center border-2">
+                  <CardContent className="p-6">
+                    <div className="text-3xl font-bold text-primary mb-2">720</div>
+                    <p className="text-sm text-muted-foreground">Questions Solved</p>
+                  </CardContent>
+                </Card>
+                <Card className="text-center border-2">
+                  <CardContent className="p-6">
+                    <div className="text-3xl font-bold text-primary mb-2">48</div>
+                    <p className="text-sm text-muted-foreground">Answers Written</p>
+                  </CardContent>
+                </Card>
               </div>
             </TabsContent>
             
             <TabsContent value="yearly" className="mt-6">
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                <div className="text-center p-4 bg-green-50 dark:bg-green-950/20 rounded-lg">
-                  <div className="text-2xl font-bold text-green-600 mb-1">2,016</div>
-                  <p className="text-sm text-muted-foreground">Study Hours</p>
-                </div>
-                <div className="text-center p-4 bg-blue-50 dark:bg-blue-950/20 rounded-lg">
-                  <div className="text-2xl font-bold text-blue-600 mb-1">8,640</div>
-                  <p className="text-sm text-muted-foreground">Questions Solved</p>
-                </div>
-                <div className="text-center p-4 bg-purple-50 dark:bg-purple-950/20 rounded-lg">
-                  <div className="text-2xl font-bold text-purple-600 mb-1">576</div>
-                  <p className="text-sm text-muted-foreground">Answers Written</p>
-                </div>
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <Card className="text-center border-2">
+                  <CardContent className="p-6">
+                    <div className="text-3xl font-bold text-primary mb-2">2,016</div>
+                    <p className="text-sm text-muted-foreground">Study Hours</p>
+                  </CardContent>
+                </Card>
+                <Card className="text-center border-2">
+                  <CardContent className="p-6">
+                    <div className="text-3xl font-bold text-primary mb-2">8,640</div>
+                    <p className="text-sm text-muted-foreground">Questions Solved</p>
+                  </CardContent>
+                </Card>
+                <Card className="text-center border-2">
+                  <CardContent className="p-6">
+                    <div className="text-3xl font-bold text-primary mb-2">576</div>
+                    <p className="text-sm text-muted-foreground">Answers Written</p>
+                  </CardContent>
+                </Card>
               </div>
             </TabsContent>
           </Tabs>
